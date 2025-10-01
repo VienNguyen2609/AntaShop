@@ -27,5 +27,6 @@ public class User {
 
     @Column(length = 20)
     private String role = "USER"; // mặc định là user
+
 }
 
