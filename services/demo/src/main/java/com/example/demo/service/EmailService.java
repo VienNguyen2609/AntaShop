@@ -5,7 +5,7 @@ import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
+import org.springframework.mail.SimpleMailMessage;
 @Service
 public class EmailService {
 
@@ -13,6 +13,16 @@ public class EmailService {
 
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
+
+    }
+
+
+    public void sendSimpleEmail(String to, String subject, String body) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(to);
+        msg.setSubject(subject);
+        msg.setText(body);
+        mailSender.send(msg);
     }
 
     public void sendHtmlEmail(String to, String subject, String username) throws MessagingException {

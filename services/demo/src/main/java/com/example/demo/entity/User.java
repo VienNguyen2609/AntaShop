@@ -4,6 +4,9 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -28,5 +31,10 @@ public class User {
     @Column(length = 20)
     private String role = "USER"; // mặc định là user
 
+    @Column(name = "reset_code")
+    private String reset_code;
+
+    @Column(name = "reset_expiry")
+    private LocalDateTime  reset_expiry;
 }
 

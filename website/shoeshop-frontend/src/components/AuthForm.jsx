@@ -31,7 +31,8 @@ export default function AuthForm({ type }) {
           : { username: formData.username, password: formData.password };
 
       const res = await axios.post(url, payload);
-     // alert(`${type} success: ` + JSON.stringify(res.data));
+      navigate("/login");
+      // alert(`${type} success: ` + JSON.stringify(res.data));
 
       if (type === "register") navigate("/login");
       else window.location.href = "https://www.facebook.com/";
@@ -92,6 +93,13 @@ export default function AuthForm({ type }) {
           {type === "register" ? "Sign Up" : "Login"}
         </button>
 
+        {/* Link forgot password chỉ hiển thị ở trang Login */}
+        {type === "login" && (
+          <p>
+            <Link to="/forgot-password">Forgot password?</Link>
+          </p>
+        )}
+
         <p>
           {type === "register" ? (
             <>
@@ -105,6 +113,7 @@ export default function AuthForm({ type }) {
             </>
           )}
         </p>
+
       </form>
     </div>
   );
