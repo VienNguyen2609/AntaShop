@@ -53,7 +53,7 @@ export default function ForgotPassword() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="submit">Send Reset Code</button>
+            <button type="submit">Send Code</button>
           </>
         )}
 
