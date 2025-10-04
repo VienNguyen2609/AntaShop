@@ -13,7 +13,6 @@ public class EmailService {
 
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
-
     }
 
 

@@ -4,6 +4,7 @@ import com.example.demo.dto.RegisterRequest;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,7 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
 
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username)

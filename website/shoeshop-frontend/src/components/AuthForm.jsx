@@ -31,11 +31,17 @@ export default function AuthForm({ type }) {
           : { username: formData.username, password: formData.password };
 
       const res = await axios.post(url, payload);
-      navigate("/login");
-      // alert(`${type} success: ` + JSON.stringify(res.data));
 
-      if (type === "register") navigate("/login");
-      else window.location.href = "https://www.facebook.com/";
+      if (type === "register") {
+        alert("Đăng ký thành công, vui lòng đăng nhập!");
+        navigate("/login");
+      } else {
+        const token = res.data.token; // 👈 lấy token từ BE
+        localStorage.setItem("token", token); // lưu token
+
+        alert("Login thành công!");
+        navigate("/home"); // 👈 chuyển hướng về home hoặc profile
+      }
     } catch (err) {
       alert("Error: " + (err.response?.data?.message || err.message));
     }
@@ -113,7 +119,6 @@ export default function AuthForm({ type }) {
             </>
           )}
         </p>
-
       </form>
     </div>
   );

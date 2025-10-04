@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.JwtUtil;
+import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.RegisterRequest;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
@@ -28,11 +30,10 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender mailSender;
-
+    private final JwtUtil jwtUtil;
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) throws MessagingException {
         User savedUser = userService.register(request);
-
         emailService.sendHtmlEmail(
                 savedUser.getEmail(),
                 "Đăng ký thành công tại ShoeShop",
@@ -42,11 +43,15 @@ public class AuthController {
         return ResponseEntity.ok("Đăng ký thành công. Vui lòng kiểm tra email.");
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        User loggedInUser = userService.login(user.getUsername(), user.getPassword());
-        return ResponseEntity.ok(loggedInUser);
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        User user = userService.login(request.getUsername(), request.getPassword());
+        String token = jwtUtil.generateToken(user.getUsername(), user.getRole());
+
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "role", user.getRole()
+        ));
     }
 
     @PostMapping("/forgot-password")
@@ -60,13 +65,11 @@ public class AuthController {
 
         User user = optionalUser.get();
 
-        // Sinh mã OTP ngẫu nhiên (6 ký tự chữ + số)
         String resetCode = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
         user.setReset_code(resetCode);
         user.setReset_expiry(LocalDateTime.now().plusMinutes(15));
         userRepository.save(user);
 
-        // Gửi email
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject("Password Reset Code");
@@ -76,7 +79,6 @@ public class AuthController {
         return ResponseEntity.ok("Reset code sent to email");
     }
 
-    // ========== 2. Xác minh mã ==========
     @PostMapping("/verify-reset-code")
     public ResponseEntity<?> verifyResetCode(@RequestBody Map<String, String> request) {
         String email = request.get("email");
@@ -103,7 +105,6 @@ public class AuthController {
         return ResponseEntity.ok("Code verified successfully");
     }
 
-    // ========== 3. Đặt lại mật khẩu ==========
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> request) {
         String email = request.get("email");
@@ -115,13 +116,9 @@ public class AuthController {
         }
 
         User user = optionalUser.get();
-
-        // Update mật khẩu
         user.setPassword(passwordEncoder.encode(newPassword));
-        // Xóa code để tránh reuse
         user.setReset_code(null);
         user.setReset_expiry(null);
-
         userRepository.save(user);
 
         return ResponseEntity.ok("Password reset successfully");
