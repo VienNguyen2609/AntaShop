@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import "./AuthForm.css";
 
 export default function AuthForm({ type }) {
@@ -24,7 +25,6 @@ export default function AuthForm({ type }) {
           ? "http://localhost:8080/api/auth/register"
           : "http://localhost:8080/api/auth/login";
 
-      // Payload cho register & login
       const payload =
         type === "register"
           ? formData
@@ -37,10 +37,20 @@ export default function AuthForm({ type }) {
         navigate("/login");
       } else {
         const token = res.data.token; // 👈 lấy token từ BE
-        localStorage.setItem("token", token); // lưu token
+        localStorage.setItem("token", token); // lưu token vào localStorage
 
-        alert("Login thành công!");
-        navigate("/home"); // 👈 chuyển hướng về home hoặc profile
+        // 🔍 Giải mã token để lấy thông tin user
+        const decoded = jwtDecode(token);
+        console.log("Decoded token:", decoded);
+
+        // 👇 Nếu token có field 'role' thì điều hướng theo quyền
+        if (decoded.role === "Admin") {
+          alert("Login thành công! Chào admin!");
+          navigate("/admin");
+        } else {
+          alert("Login thành công! Chào user!");
+          navigate("/home");
+        }
       }
     } catch (err) {
       alert("Error: " + (err.response?.data?.message || err.message));
@@ -52,7 +62,6 @@ export default function AuthForm({ type }) {
       <form className="auth-form" onSubmit={handleSubmit}>
         <h2>{type === "register" ? "Register" : "Login"}</h2>
 
-        {/* Register cần username + email */}
         {type === "register" && (
           <>
             <input
@@ -74,7 +83,6 @@ export default function AuthForm({ type }) {
           </>
         )}
 
-        {/* Login chỉ cần username */}
         {type === "login" && (
           <input
             type="text"
@@ -99,7 +107,6 @@ export default function AuthForm({ type }) {
           {type === "register" ? "Sign Up" : "Login"}
         </button>
 
-        {/* Link forgot password chỉ hiển thị ở trang Login */}
         {type === "login" && (
           <p>
             <Link to="/forgot-password">Forgot password?</Link>
@@ -109,13 +116,11 @@ export default function AuthForm({ type }) {
         <p>
           {type === "register" ? (
             <>
-              Already have an account?{" "}
-              <Link to="/login">Login</Link>
+              Already have an account? <Link to="/login">Login</Link>
             </>
           ) : (
             <>
-              Don’t have an account?{" "}
-              <Link to="/register">Register</Link>
+              Don’t have an account? <Link to="/register">Register</Link>
             </>
           )}
         </p>

@@ -29,7 +29,7 @@ public class User {
     private String password;
 
     @Column(length = 20)
-    private String role = "USER"; // mặc định là user
+    private String role = "User"; // mặc định là user
 
     @Column(name = "reset_code")
     private String reset_code;
