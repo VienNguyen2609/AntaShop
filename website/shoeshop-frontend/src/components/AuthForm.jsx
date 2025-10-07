@@ -44,7 +44,7 @@ export default function AuthForm({ type }) {
         console.log("Decoded token:", decoded);
 
         // 👇 Nếu token có field 'role' thì điều hướng theo quyền
-        if (decoded.role === "Admin") {
+        if (decoded.role === "ADMIN") {
           alert("Login thành công! Chào admin!");
           navigate("/admin");
         } else {
