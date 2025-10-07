@@ -5,6 +5,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import HomePage from "./pages/HomePage";
 import AdminPage from "./pages/AdminPage";
+import MegaSale from "./pages/MegaSale";
 function App() {
   return (
     <Router>
@@ -16,6 +17,8 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/collections/san-pham-mega-sale" element={<MegaSale />} />
+
       </Routes>
     </Router>
   );

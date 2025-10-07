@@ -1,0 +1,66 @@
+
+/* Reset CSS - giúp đồng nhất giao diện trên mọi trình duyệt */
+
+/* 1. Reset margin, padding, và border */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* 2. Reset kiểu chữ và kích thước mặc định */
+  html, body {
+    height: 100%;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  /* 3. Reset thẻ block và inline */
+  article, aside, footer, header, nav, section {
+    display: block;
+  }
+  
+  /* 4. Reset danh sách */
+  ul, ol {
+    list-style: none;
+  }
+  
+  /* 5. Reset link */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* 6. Reset hình ảnh */
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* 7. Reset button và input */
+  button, input, select, textarea {
+    font: inherit;
+    border: none;
+    background: none;
+    outline: none;
+  }
+  
+  /* 8. Reset bảng */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding:10px 20px;
+}
+.navigation{
+    display: flex;
+    gap:16px
+}
