@@ -51,7 +51,6 @@ public class MailClient {
 //
 //    }
 
-
     public void sendRegistrationEmail(String to, String username) {
         String url = "http://localhost:8082/api/mail/send-html"; // ✅ dùng endpoint HTML
 

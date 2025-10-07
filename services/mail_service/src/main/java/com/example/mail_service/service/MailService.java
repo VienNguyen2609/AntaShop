@@ -36,8 +36,6 @@ public class MailService {
     }
 
 
-
-
     public void sendHtmlEmail(String to, String subject, String username) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");

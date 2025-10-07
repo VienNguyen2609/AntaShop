@@ -15,7 +15,7 @@ public class MailController {
 
     private final MailService mailService;
 
-    // 📩 Gửi mail thường (text)
+
     @PostMapping("/send")
     public ResponseEntity<String> sendMail(@RequestBody Map<String, String> request) {
         System.out.println("📩 Mail request: " + request);
@@ -36,7 +36,7 @@ public class MailController {
         }
     }
 
-    // 🔑 Gửi mail reset mật khẩu
+
     @PostMapping("/send-reset")
     public ResponseEntity<String> sendResetCode(@RequestBody Map<String, String> body) {
         String to = body.get("to");
@@ -49,7 +49,7 @@ public class MailController {
         return ResponseEntity.ok("Reset code sent");
     }
 
-    // 🎨 Gửi mail HTML (đẹp khi đăng ký)
+
     @PostMapping("/send-html")
     public ResponseEntity<String> sendHtmlMail(@RequestBody Map<String, String> body) {
         String to = body.get("to");
