@@ -36,13 +36,13 @@ public class UserService {
             throw new RuntimeException("Email is already exists");
         }
 
-        if(request.getUsername().toLowerCase().contains("admin")){
-            throw new RuntimeException("Invalid name");
-        }
-
-        if(request.getPassword().toLowerCase().contains("admin")){
-            throw new RuntimeException("Invalid password");
-        }
+//        if(request.getUsername().toLowerCase().contains("admin")){
+//            throw new RuntimeException("Invalid name");
+//        }
+//
+//        if(request.getPassword().toLowerCase().contains("admin")){
+//            throw new RuntimeException("Invalid password");
+//        }
 
         User user = new User();
         user.setUsername(request.getUsername());

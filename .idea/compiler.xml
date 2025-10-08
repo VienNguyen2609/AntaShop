@@ -3,16 +3,22 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for product_service" enabled="true">
+      <profile name="Annotation profile for mail_service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
         </processorPath>
-        <module name="product_service" />
         <module name="mail_service" />
+        <module name="product_service" />
         <module name="auth-service" />
+      </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="oder-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -20,6 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="auth-service" options="-parameters" />
       <module name="mail_service" options="-parameters" />
+      <module name="oder-service" options="-parameters" />
       <module name="product_service" options="-parameters" />
     </option>
   </component>

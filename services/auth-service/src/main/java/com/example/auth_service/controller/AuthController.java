@@ -31,6 +31,7 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final MailClient mailClient;
 
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) throws MessagingException {
         User savedUser = userService.register(request);
