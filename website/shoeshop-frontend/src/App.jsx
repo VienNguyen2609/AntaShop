@@ -10,7 +10,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        {/* Bypass login - luôn vào home để dễ code */}
+        <Route
+          path="/"
+          element={<Navigate to="/home" />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -18,7 +22,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/collections/san-pham-mega-sale" element={<MegaSale />} />
-
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
