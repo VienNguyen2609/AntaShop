@@ -4,7 +4,6 @@ package com.example.auth_service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,8 +27,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 20)
-    private String role = "User"; // mặc định là user
+    private Role role = Role.USER;
 
     @Column(name = "reset_code")
     private String reset_code;

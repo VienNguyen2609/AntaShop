@@ -28,9 +28,9 @@ public class MailService {
             msg.setSubject(subject);
             msg.setText(body);
             mailSender.send(msg);
-            System.out.println("✅ Mail sent to " + to);
+            System.out.println(" Mail sent to " + to);
         } catch (Exception e) {
-            System.err.println("❌ Error in sendSimpleEmail: " + e.getMessage());
+            System.err.println(" Error in sendSimpleEmail: " + e.getMessage());
             throw e;
         }
     }

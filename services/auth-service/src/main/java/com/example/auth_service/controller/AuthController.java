@@ -16,6 +16,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,11 +44,14 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         User user = userService.login(request.getUsername(), request.getPassword());
-        String token = jwtUtil.generateToken(user.getUsername(), user.getRole());
+        String accessToken = jwtUtil.generateAccessToken(user.getUsername() , user.getRole().toString());
+        String refreshToken = jwtUtil.generateRefreshToken(user.getUsername());
 
         return ResponseEntity.ok(Map.of(
-                "token", token,
-                "role", user.getRole()
+                "username" , user.getUsername(),
+                "role", user.getRole().toString(),
+                "accessToken", accessToken,
+                "refreshToken", refreshToken
         ));
     }
 
@@ -122,4 +126,54 @@ public class AuthController {
         return ResponseEntity.ok("Password reset successfully");
     }
 
+
+    @GetMapping("/validate-token")
+    public ResponseEntity<?> validateToken(@RequestHeader(value = "Authorization", required = false) String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.badRequest().body(Map.of("valid", false, "error", "Missing token"));
+        }
+        String token = authHeader.substring(7);
+
+        try {
+            String username = jwtUtil.extractUsername(token);
+            List<String> roles = jwtUtil.extractRoles(token);
+            boolean expired = false;
+            try {
+                expired = jwtUtil.isTokenExpired(token);
+            } catch (Exception ex) {
+                expired = true;
+            }
+
+            if (expired) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("valid", false, "error", "Token expired"));
+            }
+
+            return ResponseEntity.ok(Map.of(
+                    "username", username,
+                    "role", roles,
+                    "valid", true
+            ));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("valid", false, "error", "Invalid token"));
+        }
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<?> refresh(@RequestBody Map<String, String> request) {
+        String refreshToken = request.get("refreshToken");
+
+        try {
+            if (!jwtUtil.isRefreshToken(refreshToken)) {
+                return ResponseEntity.status(400).body("Not a refresh token");
+            }
+            String username = jwtUtil.extractUsername(refreshToken);
+            User user = userRepository.findByUsername(username).orElseThrow();
+            String newAccessToken = jwtUtil.generateAccessToken(user.getUsername(), user.getRole().toString());
+
+            return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body("Invalid or expired refresh token");
+        }
+    }
 }

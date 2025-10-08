@@ -15,10 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-
     private final ProductRepository productRepository ;
 
-    @PostMapping(value = "/addProduct", consumes = "multipart/form-data")
+    @PostMapping(value = "/add", consumes = "multipart/form-data")
     public ResponseEntity<Product> addProduct(
             @RequestParam("name") String name,
             @RequestParam("brand") String brand,
@@ -57,4 +56,5 @@ public class ProductController {
 //        Product saved = productRepository.save(product);
 //        return ResponseEntity.ok(saved);
 //    }
+
 }

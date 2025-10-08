@@ -1,6 +1,7 @@
 package com.example.auth_service.service;
 
 import com.example.auth_service.dto.RegisterRequest;
+import com.example.auth_service.entity.Role;
 import com.example.auth_service.entity.User;
 import com.example.auth_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +17,6 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
-//    public User register(User user) {
-//        if (userRepository.existsByUsername(user.getUsername())) {
-//            throw new RuntimeException("Name is already exists");
-//        }
-//        if (userRepository.existsByEmail(user.getEmail())) {
-//            throw new RuntimeException("Email is already exists");
-//        }
-//        // Mã hóa mật khẩu trước khi lưu
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        return userRepository.save(user);
-//    }
 
     public User register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
@@ -47,6 +37,16 @@ public class UserService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
+
+        if(request.getUsername().equals("admin")){
+            user.setRole(Role.ADMIN);
+        }
+        else if(request.getUsername().equals("staff")){
+            user.setRole(Role.STAFF);
+        }
+        else{
+            user.setRole(Role.USER);
+        }
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return userRepository.save(user);

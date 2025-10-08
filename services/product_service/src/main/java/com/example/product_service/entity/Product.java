@@ -41,4 +41,5 @@ public class Product {
     @Column(name = "created_at", updatable = false, insertable = false,
             columnDefinition = "timestamp default current_timestamp")
     private java.sql.Timestamp createdAt;
+
 }

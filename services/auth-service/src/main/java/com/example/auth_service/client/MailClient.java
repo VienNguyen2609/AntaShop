@@ -20,39 +20,8 @@ public class MailClient {
     }
 
 
-//    public void sendRegistrationEmail(String to, String username) {
-//        String url = "http://localhost:8082/api/mail/send";
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//
-//        String content = "Xin chào " + username + ",\n\n"
-//                + "Cảm ơn bạn đã đăng ký tài khoản tại ShoeShop.\n\n"
-//                + "Trân trọng,\nShoeShop Team";
-//
-//        Map<String, String> body = Map.of(
-//                "to", to,
-//                "subject", "Đăng ký thành công tại ShoeShop",
-//                "content", content
-//        );
-//
-//        HttpEntity<Map<String, String>> request = new HttpEntity<>(body, headers);
-//
-//        try {
-//            ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
-//            System.out.println("Mail service response: " + response.getBody());
-//        } catch (HttpServerErrorException e) {
-//            System.err.println("Mail server error: " + e.getStatusCode() + " - " + e.getResponseBodyAsString());
-//            throw e;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            throw e;
-//        }
-//
-//    }
-
     public void sendRegistrationEmail(String to, String username) {
-        String url = "http://localhost:8082/api/mail/send-html"; // ✅ dùng endpoint HTML
+        String url = "http://localhost:8082/api/mail/send-html";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
