@@ -21,8 +21,8 @@ public class MailService {
             throw new IllegalArgumentException("Email body is null");
         }
         try {
-            System.out.println("📬 Sending email to=" + to + " subject=" + subject);
-            System.out.println("📄 Content preview: " + (body.length() > 200 ? body.substring(0,200) + "..." : body));
+            System.out.println(" Sending email to=" + to + " subject=" + subject);
+            System.out.println(" Content preview: " + (body.length() > 200 ? body.substring(0,200) + "..." : body));
             SimpleMailMessage msg = new SimpleMailMessage();
             msg.setTo(to);
             msg.setSubject(subject);

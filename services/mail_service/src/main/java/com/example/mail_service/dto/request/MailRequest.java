@@ -1,4 +1,4 @@
-package com.example.mail_service.dto;
+package com.example.mail_service.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

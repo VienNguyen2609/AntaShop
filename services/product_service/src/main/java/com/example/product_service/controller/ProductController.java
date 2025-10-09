@@ -1,5 +1,7 @@
 package com.example.product_service.controller;
 
+import com.example.product_service.dto.request.ProductRequest;
+import com.example.product_service.dto.response.ProductResponse;
 import com.example.product_service.entity.Product;
 import com.example.product_service.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
@@ -56,5 +59,11 @@ public class ProductController {
 //        Product saved = productRepository.save(product);
 //        return ResponseEntity.ok(saved);
 //    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@PathVariable Long id , ProductResponse productResponse){
+
+        return ResponseEntity.ok("Update :" +id);
+    }
 
 }
