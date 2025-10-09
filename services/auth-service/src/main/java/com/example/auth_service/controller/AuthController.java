@@ -50,7 +50,6 @@ public class AuthController {
         String email = body.get("email");
         if (email == null) return ResponseEntity.badRequest().body("Missing email");
         String code = authService.createResetCode(email); // trả về mã để gửi mail
-        // gửi mã qua mail-service
         try {
             mailClient.sendResetCodeEmail(email, code);
         } catch (Exception ignored) {}
