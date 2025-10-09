@@ -3,8 +3,8 @@ package com.example.auth_service.controller;
 
 import com.example.auth_service.client.MailClient;
 import com.example.auth_service.config.JwtUtil;
-import com.example.auth_service.dto.LoginRequest;
-import com.example.auth_service.dto.RegisterRequest;
+import com.example.auth_service.dto.request.LoginRequest;
+import com.example.auth_service.dto.request.RegisterRequest;
 import com.example.auth_service.entity.User;
 import com.example.auth_service.repository.UserRepository;
 import com.example.auth_service.service.UserService;
