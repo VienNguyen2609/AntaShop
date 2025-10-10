@@ -1,6 +1,6 @@
 package com.example.mail_service.controller;
 
-import com.example.mail_service.service.MailService;
+import com.example.mail_service.dto.request.MailRequest;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MailController {
 
-    private final MailService mailService;
+    private final MailRequest.MailService mailService;
 
 
     @PostMapping("/send")
