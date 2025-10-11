@@ -48,8 +48,7 @@ public class UserService {
         user.setRole(req.getRole());
         user.setPassword(passwordEncoder.encode(req.getPassword()));
 
-        User saved = userRepository.save(user);
-        return toResponse(saved);
+        return toResponse(userRepository.save(user));
     }
 
 
