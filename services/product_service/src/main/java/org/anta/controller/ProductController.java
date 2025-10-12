@@ -2,7 +2,6 @@ package org.anta.controller;
 
 import org.anta.dto.request.ProductRequest;
 import org.anta.dto.response.ProductResponse;
-import org.anta.repository.ProductRepository;
 import org.anta.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductRepository productRepository ;
     private final ProductService productService;
 
     @GetMapping("/all")
