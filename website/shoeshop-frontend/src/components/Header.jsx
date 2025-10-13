@@ -9,7 +9,7 @@ const Headers = () => {
     // Dữ liệu menu với dropdown
     const menuData = [
         { id: 1, name: "TRANG CHỦ", link: '/home' }, 
-        { id: 2, name: "🔥 UP TO 50%", link: '/collections/san-pham-mega-sale', highlight: true },
+        { id: 2, name: "🔥 UP TO 50%", link: '/collections/san-pham-mega-sale' },
         { id: 3, name: "HÀNG MỚI", link: '/new' },
         { id: 4, name: "ĐỘC QUYỀN ONLINE", link: '/exclusive' },
         { 
@@ -18,9 +18,10 @@ const Headers = () => {
             link: '/men',
             hasDropdown: true,
             dropdown: [
-                { title: "Giày", items: ["Chạy", "Tập luyện", "Lifestyle"] },
-                { title: "Quần áo", items: ["Áo thun", "Áo khoác", "Quần short"] },
-                { title: "Bộ sưu tập", items: ["Mega Sale", "Mới ra mắt"] }
+                { title: "Giày Nam", items: ["Chạy", "Tập luyện", "Lifestyle"] },
+                { title: "Quần Nam", items: ["Áo thun", "Áo khoác", "Quần short"] },
+                { title: "Áo Nam", items: ["Mega Sale", "Mới ra mắt"] },
+                { title: "Dép Nam", items: [] }
             ]
         },
         { 
@@ -29,8 +30,10 @@ const Headers = () => {
             link: '/women',
             hasDropdown: true,
             dropdown: [
-                { title: "Giày", items: ["Chạy", "Lifestyle"] },
-                { title: "Quần áo", items: ["Áo thun", "Áo khoác"] }
+                { title: "Giày Nữ", items: ["Chạy", "Lifestyle"] },
+                { title: "Quần Nữ", items: ["Áo thun", "Áo khoác"] },
+                { title: "Áo Nữ", items: ["Mega Sale", "Mới ra mắt"] },
+                { title: "Dép Nữ", items: [] }
             ]
         },
         { 
@@ -45,12 +48,14 @@ const Headers = () => {
         },
         { id: 8, name: "KIDS", link: '/kids' }
     ];
- 
+
+    // Hàm xử lý chuyển trang
     const handlePushRouter = (link) => {
         if (!link) return;
         navigate(link);
     };
 
+    // Hàm xử lý hover để hiện / ẩn dropdown
     const handleMouseEnter = (itemId) => {
         setActiveDropdown(itemId);
     };
@@ -65,8 +70,12 @@ const Headers = () => {
             <header className="header">
                 {/* Logo ANTA với mũi tên đỏ */}
                 <div className="logo">
-                    <div className="logo-icon">→</div>
-                    <span className="logo-text">ANTA</span>
+                    <img 
+                        src="https://theme.hstatic.net/1000150581/1001194384/14/logo.png?v=1704" 
+                        alt="ANTA Logo" 
+                        className="logo-image"
+                        onClick={() => handlePushRouter('/home')}
+                    />
                 </div>
 
                 {/* Navigation Menu */}
@@ -111,25 +120,26 @@ const Headers = () => {
 
                 {/* Cụm icon phải */}
                 <div className="header-icons">
-                    <div className="icon-item">
+                    <div className="icon-item search-icon" onClick={() => handlePushRouter('/search')}>
                         <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <circle cx="11" cy="11" r="8"/>
                             <path d="m21 21-4.35-4.35"/>
                         </svg>
                     </div>
-                    <div className="icon-item">
+                    <div className="icon-item user-icon" onClick={() => handlePushRouter('/login')}>
                         <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                             <circle cx="12" cy="7" r="4"/>
                         </svg>
+
                     </div>
-                    <div className="icon-item badge-icon">
+                    <div className="icon-item badge-icon favourite-icon" onClick={() => handlePushRouter('/favourite')}>
                         <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                         </svg>
                         <span className="badge">0</span>
                     </div>
-                    <div className="icon-item badge-icon">
+                    <div className="icon-item badge-icon shoppingcart-icon" onClick={() => handlePushRouter('/cart')}>
                         <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <circle cx="9" cy="21" r="1"/>
                             <circle cx="20" cy="21" r="1"/>
