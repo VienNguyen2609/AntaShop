@@ -43,9 +43,14 @@
         <module name="mail_service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="auth-service" target="21" />
+      <module name="pay_service" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="auth-service" options="-parameters" />
       <module name="identity-service" options="-parameters" />
       <module name="mail_service" options="-parameters" />
       <module name="oder-service" options="-parameters" />

@@ -19,9 +19,9 @@ public class MailClient {
 
 
     public void sendRegistrationEmail(String to, String username) {
-        String url = "http://localhost:8082/api/mail/send-html";
+        var url = "http://localhost:8082/api/mail/send-html";
 
-        HttpHeaders headers = new HttpHeaders();
+        var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         Map<String, String> body = Map.of(
@@ -34,9 +34,10 @@ public class MailClient {
     }
 
     public void sendResetCodeEmail(String to, String resetCode) {
-        String url = "http://localhost:8082/api/mail/send-reset"; // trỏ tới mail-service
 
-        HttpHeaders headers = new HttpHeaders();
+        var url = "http://localhost:8082/api/mail/send-reset"; // trỏ tới mail-service
+
+        var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         Map<String, String> body = Map.of(
