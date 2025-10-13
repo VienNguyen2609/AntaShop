@@ -8,7 +8,6 @@ import org.anta.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,7 @@ public class UserService {
     }
 
 
-    public UserResponse createUser(UserRequest req) {
+    public UserResponse addUser(UserRequest req) {
         if (userRepository.existsByUsername(req.getUsername())) {
             throw new RuntimeException ("Username already exists");
         }
