@@ -1,0 +1,55 @@
+/* Minimal styles for home components */
+.home-slider { margin: 20px 0; }
+.slider-track { display: grid; gap: 16px; }
+.slide { position: relative; height: 380px; background-size: cover; background-position: center; border-radius: 12px; overflow: hidden; }
+.slide-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.5)); }
+.slide-content { position: absolute; left: 32px; bottom: 32px; color: #fff; }
+.primary-btn, .secondary-btn, .link-btn { cursor: pointer; padding: 10px 16px; border-radius: 6px; border: none; font-weight: 600; }
+.primary-btn { background: #E53935; color: #fff; }
+.secondary-btn { background: #fff; color: #333; }
+.link-btn { background: transparent; color: #E53935; text-decoration: underline; padding: 0; }
+
+.coupons { padding: 32px 0; background: #fff; }
+.coupons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.coupon-card { border: 1px dashed #E53935; border-radius: 12px; padding: 16px; background: #fff5f5; }
+.coupon-code { color: #E53935; margin: 0 0 8px 0; }
+.coupon-desc { margin: 0 0 12px 0; color: #555; }
+
+.section-products { padding: 40px 0; background: #f8f9fa; }
+.section-header { text-align: center; margin-bottom: 24px; }
+.section-title { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
+
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.product-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.product-image { position: relative; aspect-ratio: 1; overflow: hidden; }
+.product-image img { width: 100%; height: 100%; object-fit: cover; }
+.product-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; gap: 8px; align-items: center; justify-content: center; opacity: 0; transition: .2s; }
+.product-card:hover .product-overlay { opacity: 1; }
+.product-badge { position: absolute; top: 10px; left: 10px; background: #E53935; color: #fff; padding: 4px 8px; border-radius: 999px; font-size: 12px; }
+.product-info { padding: 14px; }
+.product-name { margin: 0 0 8px 0; font-size: 16px; }
+.product-price { display: flex; gap: 8px; align-items: center; }
+.current-price { color: #E53935; font-weight: 700; }
+.original-price { color: #999; text-decoration: line-through; }
+.discount { background: #E53935; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+
+.lookbook { padding: 40px 0; background: #fff; }
+.lookbook-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.lookbook-card { position: relative; border-radius: 12px; overflow: hidden; }
+.lookbook-card img { width: 100%; height: 100%; object-fit: cover; }
+.lookbook-overlay { position: absolute; inset: 0; background: rgba(229,57,53,0.4); color: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; transition: .2s; }
+.lookbook-card:hover .lookbook-overlay { opacity: 1; }
+
+.brand-strip { padding: 24px 0; background: #fff; }
+.brand-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 16px; align-items: center; }
+.brand-row img { width: 100%; height: auto; filter: grayscale(1); opacity: .8; }
+
+.blog-teasers { padding: 40px 0; background: #fff; }
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.blog-card { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); background: #fff; }
+.blog-card img { width: 100%; height: 160px; object-fit: cover; }
+.blog-body { padding: 12px; }
+.blog-date { color: #999; margin: 0 0 6px 0; font-size: 12px; }
+.blog-title { margin: 0 0 8px 0; font-size: 16px; }
+
+
