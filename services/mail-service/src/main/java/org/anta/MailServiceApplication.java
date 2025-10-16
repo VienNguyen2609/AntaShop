@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-@EnableAsync // gửi mail bất đồng bộ
+@EnableAsync
 public class MailServiceApplication {
 
 	public static void main(String[] args) {

@@ -19,23 +19,23 @@ public class FileMetadata {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "file_name", nullable = false)
-    private String fileName;
-
     @Column(name = "url", nullable = false)
     private String url;
-
-    @Column(name = "content_type", nullable = false)
-    private String contentType;
-
-    @Column(name = "size", nullable = false)
-    private Long size;
 
     @Column(name = "uploader_id", nullable = false)
     private Long uploaderId;
 
     @Column(name = "product_id", nullable = false)
     private Long productId;
+
+    @Column(name = "public_id")
+    private String publicId;
+
+    @Column(name = "format")
+    private String format;
+
+    @Column(name = "resource_type")
+    private String resourceType;
 
     @Column(name = "uploaded_at", nullable = false)
     private LocalDateTime uploadedAt;
@@ -44,4 +44,5 @@ public class FileMetadata {
     protected void onCreate() {
         uploadedAt = LocalDateTime.now();
     }
+
 }

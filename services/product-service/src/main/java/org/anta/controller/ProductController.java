@@ -29,7 +29,7 @@ public class ProductController {
 
     @PostMapping("/add")
     public Map<ResponseEntity<ProductResponse> , String> addProduct(@RequestBody ProductRequest productRequest){
-        ProductResponse productResponse = productService.createProduct(productRequest);
+        ProductResponse productResponse = productService.addProduct(productRequest);
         return Map.of(ResponseEntity.ok(productResponse) , "Created Successfully\n " +
                 "id: "
                 + productResponse.getId()
