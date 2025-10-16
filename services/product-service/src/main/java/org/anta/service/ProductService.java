@@ -33,7 +33,7 @@ public class ProductService {
         return productMapper.toResponse(product);
     }
 
-    public ProductResponse createProduct(ProductRequest productRequest){
+    public ProductResponse addProduct(ProductRequest productRequest){
 
         Product product = new Product();
         product.setName(productRequest.getName());

@@ -1,7 +1,7 @@
 package org.anta.payment_service.controller;
 
 
-import lombok.Getter;
+
 import lombok.RequiredArgsConstructor;
 import org.anta.payment_service.constant.MomoParameter;
 import org.anta.payment_service.service.MomoService;

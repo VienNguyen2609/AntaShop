@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.anta</groupId>
-	<artifactId>mail_service</artifactId>
+	<artifactId>mail-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mail_service</name>
 	<description>Demo project for Spring Boot</description>
@@ -70,7 +70,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.anta</groupId>
-			<artifactId>mail_service</artifactId>
+			<artifactId>mail-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
