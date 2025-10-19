@@ -35,7 +35,7 @@ public class MailClient {
 
     public void sendResetCodeEmail(String to, String resetCode) {
 
-        var url = "http://localhost:8082/api/mail/send-reset"; // trỏ tới mail-service
+        var url = "http://localhost:8082/api/mail/send-reset";
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

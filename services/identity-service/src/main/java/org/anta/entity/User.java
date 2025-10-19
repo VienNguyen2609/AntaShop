@@ -29,10 +29,10 @@ public class User {
     @Column(length = 20)
     private Role role = Role.USER;
 
-    @Column(name = "reset_code")
-    private String reset_code;
-
-    @Column(name = "reset_expiry")
-    private LocalDateTime  reset_expiry;
+//    @Column(name = "reset_code")
+//    private String reset_code;
+//
+//    @Column(name = "reset_expiry")
+//    private LocalDateTime  reset_expiry;
 }
 

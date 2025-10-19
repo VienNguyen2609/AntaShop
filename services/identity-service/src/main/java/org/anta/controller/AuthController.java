@@ -61,8 +61,8 @@ public class AuthController {
         String email = body.get("email");
         String code = body.get("code");
         if (email == null || code == null) return ResponseEntity.badRequest().body("Missing fields");
-        boolean ok = authService.verifyResetCode(email, code);
-        if (!ok) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired code");
+        boolean verify = authService.verifyResetCode(email, code);
+        if (!verify) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired code");
         return ResponseEntity.ok(Map.of("message", "Code verified"));
     }
 
