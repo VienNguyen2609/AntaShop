@@ -18,15 +18,15 @@ import java.util.UUID;
 @Slf4j
 public class MomoService {
 
-    @Value(value = "MOMO")
+    @Value("${momo.partner-code}")
     private String PARTNER_CODE;
-    @Value(value = "F8BBA842ECF85")
+    @Value("${momo.access-key}")
     private String ACCESS_KEY;
-    @Value(value = "K951B6PE1waDMi640xX08PD3vg6EkVlz")
+    @Value("${momo.secret-key}")
     private String SECRET_KEY;
-    @Value(value = "https://localhost:3000/")
+    @Value("${momo.return-url}")
     private String REDIRECT_URL;
-    @Value(value = "http://localhost:8080/api/momo/ipn-handler")
+    @Value("${momo.ipn-url}")
     private String IPN_URL;
     @Value(value = "captureWallet")
     private String REQUEST_TYPE;

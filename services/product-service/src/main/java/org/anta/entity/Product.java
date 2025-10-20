@@ -25,12 +25,6 @@ public class Product {
 
     private Double price;
 
-    private Integer stock;
-
-    private String size;
-
-    private String color;
-
     private String category;
 
     @Convert(converter = JsonListConverter.class)

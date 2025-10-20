@@ -16,12 +16,6 @@ public class ProductRequest {
 
     private Double price;
 
-    private Integer stock;
-
-    private String size;
-
-    private String color;
-
     private String category;
 
     private List<String> images;
