@@ -40,11 +40,7 @@ public class ProductService {
         product.setBrand(productRequest.getBrand());
         product.setDescription(productRequest.getDescription());
         product.setPrice(productRequest.getPrice());
-        product.setStock(productRequest.getStock());
-        product.setSize(productRequest.getSize());
-        product.setColor(productRequest.getColor());
         product.setCategory(productRequest.getCategory());
-
         product.setImages(productRequest.getImages() == null ? List.of() :
                 productRequest.getImages());
         product.setCreatedAt(productRequest.getCreatedAt());
@@ -60,9 +56,6 @@ public class ProductService {
         product.setBrand(productRequest.getBrand());
         product.setDescription(productRequest.getDescription());
         product.setPrice(productRequest.getPrice());
-        product.setStock(productRequest.getStock());
-        product.setSize(productRequest.getSize());
-        product.setColor(productRequest.getColor());
         product.setCategory(productRequest.getCategory());
         product.setImages(productRequest.getImages() == null ? List.of() :
                 productRequest.getImages());
