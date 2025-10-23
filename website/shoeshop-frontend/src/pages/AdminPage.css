@@ -1,0 +1,29 @@
+/* Admin Page Layout */
+.admin-page {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-top: 80px; /* Account for fixed header */
+}
+
+.admin-main {
+  flex: 1;
+  margin-left: 250px;
+  padding: 0;
+  background: #f5f5f5;
+}
+
+.admin-content {
+  padding: 30px;
+  background: white;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-main {
+    margin-left: 0;
+  }
+}
