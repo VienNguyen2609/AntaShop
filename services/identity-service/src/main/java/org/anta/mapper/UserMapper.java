@@ -1,3 +1,4 @@
+
 package org.anta.mapper;
 
 import org.anta.dto.request.UserRequest;
@@ -12,4 +13,3 @@ public interface UserMapper {
 
     User toEntity(UserRequest userRequest);
 }
-
