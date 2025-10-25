@@ -1,23 +1,22 @@
 package org.anta.dto.response;
 
-import jakarta.persistence.*;
 import lombok.Data;
-import org.anta.entity.Product;
-
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 public class ProductVariantResponse {
 
     private Long id;
 
-    private Product product;
+    private Long productId;
+
+    private String productName;
 
     private String sku;
 
-    private String name;
-
-    private Double price;
+    private BigDecimal price;
 
     private Integer stock;
 
@@ -25,7 +24,7 @@ public class ProductVariantResponse {
 
     private String color;
 
-    private String attributes;
+    private Map<String, String> attributes;
 
     private LocalDateTime createdAt;
 

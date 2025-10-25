@@ -1,17 +1,17 @@
 package org.anta.dto.request;
+
 import lombok.Data;
-import org.anta.entity.Product;
+import java.math.BigDecimal;
+import java.util.Map;
 
 @Data
 public class ProductVariantRequest {
 
-    private Product product;
+    private Long productId;
 
     private String sku;
 
-    private String name;
-
-    private Double price;
+    private BigDecimal price;
 
     private Integer stock;
 
@@ -19,6 +19,6 @@ public class ProductVariantRequest {
 
     private String color;
 
-    private String attributes;
+    private Map<String, String> attributes;
 
 }

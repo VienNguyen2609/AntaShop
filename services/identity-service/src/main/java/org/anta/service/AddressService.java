@@ -46,12 +46,7 @@ public class AddressService {
             throw new RuntimeException("You cannot update another user's address");
         }
 
-        address.setAddressLine(addressRequest.getAddressLine());
-        address.setCity(addressRequest.getCity());
-        address.setDistrict(addressRequest.getDistrict());
-        address.setWard(addressRequest.getWard());
-        address.setPostalCode(addressRequest.getPostalCode());
-        address.setIsDefault(addressRequest.getIsDefault());
+        addressMapper.updateFromRequest(addressRequest, address);
 
         var updatedAddress = addressRepository.save(address);
 

@@ -27,7 +27,6 @@ public class ProductVariant {
     @Column(length = 100, unique = true)
     private String sku;
 
-
     @Column(precision = 12, scale = 2)
     private BigDecimal price;
 

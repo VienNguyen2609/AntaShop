@@ -5,8 +5,7 @@ package org.anta.mapper;
 import org.anta.dto.request.AddressRequest;
 import org.anta.dto.response.AddressResponse;
 import org.anta.entity.Address;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface AddressMapper {
@@ -17,4 +16,8 @@ public interface AddressMapper {
 
     AddressResponse toResponse(Address address);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    void updateFromRequest(AddressRequest request, @MappingTarget Address entity);
 }
