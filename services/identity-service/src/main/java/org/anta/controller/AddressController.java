@@ -31,7 +31,7 @@ public class AddressController {
             @PathVariable Long userId,
             @RequestBody AddressRequest addressRequest)
     {
-        return ResponseEntity.ok(Map.of(addressService.addAddress(userId , addressRequest) , "" +
+        return ResponseEntity.ok(Map.of(addressService.add(userId , addressRequest) , "" +
                 "Add address successfully " + " for user: " +userId));
     }
 
@@ -42,7 +42,7 @@ public class AddressController {
             @PathVariable Long userId,
             @RequestBody AddressRequest addressRequest)
     {
-        return ResponseEntity.ok(Map.of(addressService.updateAddress(addressId , userId , addressRequest) , "" +
+        return ResponseEntity.ok(Map.of(addressService.update(addressId , userId , addressRequest) , "" +
                 "Update address successfully" + addressId +" for user " + userId));
     }
 
@@ -52,7 +52,7 @@ public class AddressController {
             @PathVariable Long addressId ,
             @PathVariable Long userId)
     {
-        addressService.deleteAddress(addressId , userId);
+        addressService.delete(addressId , userId);
         return ResponseEntity.ok("Delete address successfully" + addressId +" for user " + userId);
     }
 

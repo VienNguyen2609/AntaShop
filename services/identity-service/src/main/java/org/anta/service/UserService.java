@@ -42,42 +42,35 @@ public class UserService {
             throw new RuntimeException ("Email already exists");
         }
 
-        User user = new User();
-        user.setUsername(req.getUsername());
-        user.setEmail(req.getEmail());
-        user.setRole(req.getRole());
+        User user = userMapper.toEntity(req);
+
         user.setPassword(passwordEncoder.encode(req.getPassword()));
 
-        System.out.println("Mapper impl class = " + userMapper.getClass().getName());
-        UserResponse r = userMapper.toResponse(user);
-        System.out.println("mapped response = " + r);
-
         User saved = userRepository.save(user);
+
         return userMapper.toResponse(saved);
     }
 
 
     public UserResponse updateUser(Long id, UserRequest req) {
+
         User existing = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
 
-        if (req.getUsername() != null && !req.getUsername().equals(existing.getUsername())) {
-            if (userRepository.existsByUsername(req.getUsername())) {
-                throw new RuntimeException ("Username already exists");
-            }
-            existing.setUsername(req.getUsername());
+        if (req.getUsername() != null && !req.getUsername().equals(existing.getUsername())
+                && userRepository.existsByUsername(req.getUsername())) {
+            throw new RuntimeException("Username already exists");
         }
-        if (req.getEmail() != null && !req.getEmail().equals(existing.getEmail())) {
-            if (userRepository.existsByEmail(req.getEmail())) {
-                throw new RuntimeException ("Email already exists");
-            }
-            existing.setEmail(req.getEmail());
+        if (req.getEmail() != null && !req.getEmail().equals(existing.getEmail())
+                && userRepository.existsByEmail(req.getEmail())) {
+            throw new RuntimeException("Email already exists");
         }
+
+        userMapper.updateEntityFromRequest(req, existing);
 
         if (req.getPassword() != null && !req.getPassword().isEmpty()) {
             existing.setPassword(passwordEncoder.encode(req.getPassword()));
         }
-        if (req.getRole() != null) existing.setRole(req.getRole());
 
         User saved = userRepository.save(existing);
         return userMapper.toResponse(saved);

@@ -2,8 +2,11 @@ package org.anta.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.anta.util.JsonMapConverter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Entity
 @Table(name = "product_variants")
@@ -24,10 +27,8 @@ public class ProductVariant {
     @Column(length = 100, unique = true)
     private String sku;
 
-    private String name;
-
     @Column(precision = 12, scale = 2)
-    private Double price;
+    private BigDecimal price;
 
     private Integer stock = 0;
 
@@ -35,8 +36,9 @@ public class ProductVariant {
 
     private String color;
 
+    @Convert(converter = JsonMapConverter.class)
     @Column(columnDefinition = "json")
-    private String attributes;
+    private Map<String, String> attributes;
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;

@@ -1,0 +1,84 @@
+/* HomePage Styles - Figma Design Match */
+.homepage {
+  padding-top: 0; /* Remove padding since header is fixed */
+  margin: 0;
+  background: white;
+}
+
+/* Ensure content doesn't get hidden behind fixed header */
+.homepage > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Consistent spacing for all sections */
+.homepage .hero-banner,
+.homepage .discount-codes,
+.homepage .product-sections {
+  margin: 0;
+  padding: 2rem 0;
+}
+
+/* Hero Banner specific styles */
+.homepage .hero-banner {
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffd700 100%);
+  min-height: 500px;
+}
+
+/* Discount Codes specific styles */
+.homepage .discount-codes {
+  background: #f8f9fa;
+}
+
+/* Product Sections specific styles */
+.homepage .product-sections {
+  background: white;
+}
+
+/* Mobile spacing adjustments */
+@media (max-width: 768px) {
+  .homepage .hero-banner,
+  .homepage .discount-codes,
+  .homepage .product-sections {
+    padding: 1.5rem 0;
+  }
+  
+  .homepage .hero-banner {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage .hero-banner,
+  .homepage .discount-codes,
+  .homepage .product-sections {
+    padding: 1rem 0;
+  }
+  
+  .homepage .hero-banner {
+    min-height: 350px;
+  }
+}
+
+/* Ensure proper flow between sections */
+.homepage .hero-banner + .discount-codes {
+  margin-top: 0;
+}
+
+.homepage .discount-codes + .product-sections {
+  margin-top: 0;
+}
+
+/* Responsive container adjustments */
+@media (max-width: 1200px) {
+  .homepage .container {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .homepage .container {
+    padding: 0 0.5rem;
+  }
+}
