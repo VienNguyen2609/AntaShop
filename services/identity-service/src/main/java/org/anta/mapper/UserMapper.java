@@ -1,4 +1,3 @@
-
 package org.anta.mapper;
 
 import org.anta.dto.request.UserRequest;
@@ -19,3 +18,4 @@ public interface UserMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromRequest(UserRequest req, @MappingTarget User entity);
 }
+
