@@ -25,7 +25,7 @@ public class AddressService {
                 .toList();
     }
 
-    public AddressResponse addAddress(Long userId, AddressRequest addressRequest){
+    public AddressResponse add(Long userId, AddressRequest addressRequest){
         var user  = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -37,7 +37,7 @@ public class AddressService {
         return addressMapper.toResponse(savedAddress);
     }
 
-    public AddressResponse updateAddress(Long addressId , Long userId, AddressRequest addressRequest){
+    public AddressResponse update(Long addressId , Long userId, AddressRequest addressRequest){
 
         var address = addressRepository.findById(addressId)
                 .orElseThrow(() -> new RuntimeException("Address not found"));
@@ -58,7 +58,7 @@ public class AddressService {
         return addressMapper.toResponse(updatedAddress);
     }
 
-    public void deleteAddress(Long addressId , Long userId){
+    public void delete(Long addressId , Long userId){
 
         var address = addressRepository.findById(addressId)
                 .orElseThrow(() -> new RuntimeException("Address not found"));
