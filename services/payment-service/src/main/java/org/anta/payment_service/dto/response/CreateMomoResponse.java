@@ -17,7 +17,7 @@ public class CreateMomoResponse {
 
     private String requestId;
 
-    private long amount;
+    private Long amount;
 
     private long responseTime;
 

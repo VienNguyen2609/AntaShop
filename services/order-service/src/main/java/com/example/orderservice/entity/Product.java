@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Table(name = "products")
 @Getter
 @Immutable // Chỉ đọc, không được cập nhật
-@FieldDefaults(level = AccessLevel.PRIVATE) // thay cho prive
+@FieldDefaults(level = AccessLevel.PRIVATE) // y cho privetha
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
