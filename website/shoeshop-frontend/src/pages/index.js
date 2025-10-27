@@ -1,4 +1,3 @@
-// Export all pages from a single file
 export { default as HomePage } from './HomePage';
 export { default as Login } from './Login';
 export { default as Register } from './Register';
@@ -7,3 +6,5 @@ export { default as ResetPassword } from './ResetPassword';
 export { default as AdminPage } from './AdminPage';
 export { default as CartPage } from './CartPage';
 export { default as MegaSale } from './MegaSale';
+export { default as ProductListPage } from './ProductListPage';
+export { default as ProductDetailPage } from './ProductDetailPage';

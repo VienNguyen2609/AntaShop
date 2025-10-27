@@ -9,7 +9,9 @@ import {
   ResetPassword, 
   AdminPage, 
   MegaSale, 
-  CartPage 
+  CartPage,
+  ProductListPage,
+  ProductDetailPage
 } from "./pages";
 
 function App() {
@@ -18,11 +20,7 @@ function App() {
       <CartProvider>
         <Router>
           <Routes>
-            {/* Bypass login - luôn vào home để dễ code */}
-            <Route
-              path="/"
-              element={<Navigate to={ROUTES.HOME} />}
-            />
+            <Route path="/" element={<Navigate to={ROUTES.HOME} />} />
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route path={ROUTES.REGISTER} element={<Register />} />
             <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
@@ -31,6 +29,14 @@ function App() {
             <Route path={ROUTES.ADMIN} element={<AdminPage />} />
             <Route path={ROUTES.CART} element={<CartPage />} />
             <Route path={ROUTES.MEGA_SALE} element={<MegaSale />} />
+            <Route path="/products" element={<ProductListPage />} />
+            <Route path="/product/:id" element={<ProductDetailPage />} />
+            <Route path="/men" element={<ProductListPage />} />
+            <Route path="/women" element={<ProductListPage />} />
+            <Route path="/kids" element={<ProductListPage />} />
+            <Route path="/accessories" element={<ProductListPage />} />
+            <Route path="/new" element={<ProductListPage />} />
+            <Route path="/exclusive" element={<ProductListPage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>

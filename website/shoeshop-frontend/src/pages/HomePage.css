@@ -1,84 +1,256 @@
-/* HomePage Styles - Figma Design Match */
 .homepage {
-  padding-top: 0; /* Remove padding since header is fixed */
-  margin: 0;
-  background: white;
+  background: var(--color-bg);
 }
 
-/* Ensure content doesn't get hidden behind fixed header */
-.homepage > * {
+.categories-section,
+.featured-section,
+.new-arrivals-section,
+.brands-section {
+  padding: var(--space-xxl) 0;
+  background: var(--color-surface);
+}
+
+.categories-section {
+  background: var(--color-bg);
+}
+
+.featured-section {
+  background: var(--color-surface);
+}
+
+.new-arrivals-section {
+  background: var(--color-bg);
+}
+
+.brands-section {
+  background: var(--color-surface);
+}
+
+.promotional-banner {
+  padding: var(--space-xxxl) 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, var(--color-dark) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xxxl);
+  align-items: center;
+}
+
+.promo-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  z-index: 2;
+}
+
+.promo-badge {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: fit-content;
+}
+
+.promo-title {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-surface);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.promo-description {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.promo-button {
+  padding: var(--space-md) var(--space-xxl);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: fit-content;
+}
+
+.promo-button:hover {
+  filter: brightness(0.95);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.promo-image-block {
   position: relative;
   z-index: 1;
 }
 
-/* Consistent spacing for all sections */
-.homepage .hero-banner,
-.homepage .discount-codes,
-.homepage .product-sections {
-  margin: 0;
-  padding: 2rem 0;
+.promo-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Hero Banner specific styles */
-.homepage .hero-banner {
-  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffd700 100%);
-  min-height: 500px;
+.newsletter-section {
+  padding: var(--space-xxxl) 0;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #c2000e 100%);
 }
 
-/* Discount Codes specific styles */
-.homepage .discount-codes {
-  background: #f8f9fa;
+.newsletter-container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Product Sections specific styles */
-.homepage .product-sections {
-  background: white;
+.newsletter-content {
+  text-align: center;
+  color: var(--color-surface);
 }
 
-/* Mobile spacing adjustments */
-@media (max-width: 768px) {
-  .homepage .hero-banner,
-  .homepage .discount-codes,
-  .homepage .product-sections {
-    padding: 1.5rem 0;
+.newsletter-title {
+  font-size: 36px;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-md);
+  color: var(--color-surface);
+}
+
+.newsletter-description {
+  font-size: 16px;
+  margin-bottom: var(--space-xl);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: var(--space-md);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: var(--space-md) var(--space-lg);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-surface);
+  font-size: 15px;
+  transition: all var(--transition-fast);
+}
+
+.newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: var(--color-surface);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.newsletter-button {
+  padding: var(--space-md) var(--space-xxl);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.newsletter-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 992px) {
+  .promo-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
   
-  .homepage .hero-banner {
-    min-height: 400px;
+  .promo-title {
+    font-size: 36px;
+  }
+  
+  .promo-description {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-section,
+  .featured-section,
+  .new-arrivals-section,
+  .brands-section {
+    padding: var(--space-xl) 0;
+  }
+  
+  .promotional-banner {
+    padding: var(--space-xl) 0;
+  }
+  
+  .promo-title {
+    font-size: 28px;
+  }
+  
+  .promo-description {
+    font-size: 14px;
+  }
+  
+  .newsletter-section {
+    padding: var(--space-xl) 0;
+  }
+  
+  .newsletter-title {
+    font-size: 28px;
+  }
+  
+  .newsletter-description {
+    font-size: 14px;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+  }
+  
+  .newsletter-button {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .homepage .hero-banner,
-  .homepage .discount-codes,
-  .homepage .product-sections {
-    padding: 1rem 0;
+  .promo-title {
+    font-size: 24px;
   }
   
-  .homepage .hero-banner {
-    min-height: 350px;
+  .promo-button {
+    width: 100%;
+    text-align: center;
   }
-}
-
-/* Ensure proper flow between sections */
-.homepage .hero-banner + .discount-codes {
-  margin-top: 0;
-}
-
-.homepage .discount-codes + .product-sections {
-  margin-top: 0;
-}
-
-/* Responsive container adjustments */
-@media (max-width: 1200px) {
-  .homepage .container {
-    max-width: 100%;
-    padding: 0 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .homepage .container {
-    padding: 0 0.5rem;
+  
+  .newsletter-title {
+    font-size: 24px;
   }
 }
