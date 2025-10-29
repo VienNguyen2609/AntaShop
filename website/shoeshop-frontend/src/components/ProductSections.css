@@ -1,17 +1,22 @@
 /* Product Sections Styles - Figma Design Match */
 .product-sections {
-  padding: 2rem 0;
-  background: white;
+  padding: var(--space-xxl) 0;
+  background: var(--color-surface);
   margin: 0;
+  width: 100%;
 }
 
 .product-section {
-  margin-bottom: 4rem;
+  margin-bottom: var(--space-xxxl);
+}
+
+.product-section:last-child {
+  margin-bottom: 0;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-xl);
 }
 
 .section-title-button {
@@ -65,30 +70,37 @@
   border-color: #dc2626;
 }
 
-.products-grid {
+.product-sections .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  padding: 0 1rem;
-  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  padding: 0;
+  justify-items: stretch;
   align-items: start;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-xl);
+  padding-right: var(--space-xl);
 }
 
-.product-card {
-  background: white;
-  border-radius: 12px;
+.product-sections .product-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
   position: relative;
   max-width: 100%;
   width: 100%;
+  border: 1px solid var(--color-border);
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+.product-sections .product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
 }
 
 .product-image-container {
@@ -246,31 +258,45 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .product-sections .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+  }
+}
+
+@media (max-width: 992px) {
+  .product-sections .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .product-sections {
-    padding: 1.5rem 0;
+    padding: var(--space-xl) 0;
   }
-  
+
   .section-title-button {
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
   }
-  
+
   .category-tabs {
-    gap: 0.5rem;
+    gap: var(--space-xs);
     justify-content: center;
   }
-  
+
   .tab-button {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
   }
-  
-  .products-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    padding: 0 0.5rem;
-    justify-items: stretch;
+
+  .product-sections .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
   }
   
   .product-card {
@@ -291,29 +317,22 @@
 }
 
 @media (max-width: 480px) {
-  .products-grid {
+  .product-sections .products-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 0 1rem;
+    gap: var(--space-md);
   }
-  
-  .product-card {
-    max-width: 100%;
-  }
-  
+
   .section-title-button {
     padding: 0.7rem 1.5rem;
     font-size: 1rem;
   }
-  
+
   .category-tabs {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-xs);
   }
-  
+
   .tab-button {
-    width: 200px;
-    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 }

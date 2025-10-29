@@ -1,17 +1,23 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { CartProvider, AuthProvider } from "./contexts";
 import { ROUTES } from "./constants";
-import { 
-  HomePage, 
-  Login, 
-  Register, 
-  ForgotPassword, 
-  ResetPassword, 
-  AdminPage, 
-  MegaSale, 
+import {
+  HomePage,
+  Login,
+  Register,
+  ForgotPassword,
+  ResetPassword,
+  AdminPage,
+  MegaSale,
   CartPage,
   ProductListPage,
-  ProductDetailPage
+  ProductDetailPage,
+  BlogPage,
+  BlogDetailPage,
+  SearchPage,
+  CheckoutPage,
+  OrderSuccessPage,
+  AccountPage
 } from "./pages";
 
 function App() {
@@ -31,6 +37,13 @@ function App() {
             <Route path={ROUTES.MEGA_SALE} element={<MegaSale />} />
             <Route path="/products" element={<ProductListPage />} />
             <Route path="/product/:id" element={<ProductDetailPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:id" element={<BlogDetailPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-success" element={<OrderSuccessPage />} />
+            <Route path="/account" element={<AccountPage />} />
+            <Route path="/account/:section" element={<AccountPage />} />
             <Route path="/men" element={<ProductListPage />} />
             <Route path="/women" element={<ProductListPage />} />
             <Route path="/kids" element={<ProductListPage />} />

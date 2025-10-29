@@ -60,7 +60,7 @@
 
 /* Body padding to account for fixed header and top banner */
 body {
-  padding-top: calc(var(--header-height) + 36px);
+  padding-top: 116px;
   margin: 0;
   font-family: var(--font-family-base);
   -webkit-font-smoothing: antialiased;
@@ -349,21 +349,28 @@ a:focus-visible {
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body {
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+* {
+  max-width: 100%;
 }
 
 @media (max-width: 992px) {
   body {
-    padding-top: calc(var(--header-height) + 30px);
+    padding-top: 110px;
   }
 }
 
 @media (max-width: 768px) {
   body {
-    padding-top: 90px;
+    padding-top: 105px;
   }
 }
 

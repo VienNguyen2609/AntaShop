@@ -3,14 +3,18 @@
   display: flex;
   flex-direction: column;
   background: var(--color-bg);
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .layout-main {
   flex: 1;
   padding-top: 0;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .layout-main > * {
   width: 100%;
+  max-width: 100%;
 }

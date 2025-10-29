@@ -2,17 +2,21 @@
   background: var(--color-bg);
   width: 100%;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .homepage section {
   width: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 
 .sport-categories-section {
   padding: var(--space-xxxl) 0;
   background: var(--color-surface);
+  width: 100%;
+  margin: 0;
 }
 
 .sport-categories-grid {
@@ -101,11 +105,15 @@
 .featured-products-section {
   padding: var(--space-xxxl) 0;
   background: var(--color-bg);
+  width: 100%;
+  margin: 0;
 }
 
 .promo-banner-section {
   padding: var(--space-xxxl) 0;
   background: linear-gradient(135deg, #1a1a1a 0%, var(--color-dark) 100%);
+  width: 100%;
+  margin: 0;
 }
 
 .promo-banner-grid {
@@ -187,6 +195,8 @@
 .collections-showcase-section {
   padding: var(--space-xxxl) 0;
   background: var(--color-surface);
+  width: 100%;
+  margin: 0;
 }
 
 .collections-showcase-grid {
@@ -289,11 +299,15 @@
 .new-arrivals-section {
   padding: var(--space-xxxl) 0;
   background: var(--color-bg);
+  width: 100%;
+  margin: 0;
 }
 
 .brand-story-section {
   padding: var(--space-xxxl) 0;
   background: var(--color-surface);
+  width: 100%;
+  margin: 0;
 }
 
 .brand-story-grid {
@@ -409,11 +423,15 @@
 .brands-partners-section {
   padding: var(--space-xxxl) 0;
   background: var(--color-bg);
+  width: 100%;
+  margin: 0;
 }
 
 .newsletter-signup-section {
   padding: var(--space-xxxl) 0;
   background: linear-gradient(135deg, var(--color-primary) 0%, #a00009 100%);
+  width: 100%;
+  margin: 0;
 }
 
 .newsletter-signup-wrapper {
