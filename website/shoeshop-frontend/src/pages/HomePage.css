@@ -1,128 +1,14 @@
 .homepage {
   background: var(--color-bg);
-}
-
-.hero-slider-section {
-  position: relative;
-  height: 600px;
-  overflow: hidden;
-  background: var(--color-dark);
-}
-
-.hero-slide {
-  position: relative;
   width: 100%;
-  height: 100%;
-  display: none;
+  overflow-x: hidden;
 }
 
-.hero-slide.active {
-  display: block;
-}
-
-.hero-slide-image {
+.homepage section {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  position: relative;
 }
 
-.hero-slide-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
-}
-
-.hero-slide-content {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  text-align: center;
-  z-index: 2;
-  padding: 0 var(--space-lg);
-}
-
-.hero-badge {
-  display: inline-block;
-  padding: var(--space-xs) var(--space-lg);
-  background: var(--color-primary);
-  color: var(--color-surface);
-  font-size: 12px;
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 20px;
-  margin-bottom: var(--space-md);
-}
-
-.hero-title {
-  font-size: 64px;
-  font-weight: var(--font-weight-bold);
-  color: var(--color-surface);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: var(--space-md);
-  line-height: 1.1;
-}
-
-.hero-description {
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: var(--space-xl);
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-actions {
-  display: flex;
-  gap: var(--space-md);
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-button {
-  padding: var(--space-md) var(--space-xxl);
-  font-size: 14px;
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all var(--transition-base);
-  border: 2px solid transparent;
-}
-
-.hero-button.primary {
-  background: var(--color-primary);
-  color: var(--color-surface);
-  border-color: var(--color-primary);
-}
-
-.hero-button.primary:hover {
-  background: var(--color-surface);
-  color: var(--color-primary);
-  border-color: var(--color-surface);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.hero-button.secondary {
-  background: transparent;
-  color: var(--color-surface);
-  border-color: var(--color-surface);
-}
-
-.hero-button.secondary:hover {
-  background: var(--color-surface);
-  color: var(--color-dark);
-  transform: translateY(-2px);
-}
 
 .sport-categories-section {
   padding: var(--space-xxxl) 0;
@@ -616,31 +502,16 @@
 }
 
 @media (max-width: 1200px) {
-  .hero-title {
-    font-size: 52px;
-  }
-  
   .sport-categories-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .sport-category-card {
     height: 350px;
   }
 }
 
 @media (max-width: 992px) {
-  .hero-slider-section {
-    height: 500px;
-  }
-  
-  .hero-title {
-    font-size: 42px;
-  }
-  
-  .hero-description {
-    font-size: 16px;
-  }
   
   .promo-banner-grid,
   .brand-story-grid,
@@ -664,27 +535,6 @@
 }
 
 @media (max-width: 768px) {
-  .hero-slider-section {
-    height: 400px;
-  }
-  
-  .hero-title {
-    font-size: 32px;
-  }
-  
-  .hero-description {
-    font-size: 14px;
-  }
-  
-  .hero-actions {
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .hero-button {
-    width: 100%;
-    padding: var(--space-md) var(--space-lg);
-  }
   
   .sport-categories-section,
   .featured-products-section,
@@ -762,17 +612,6 @@
 }
 
 @media (max-width: 480px) {
-  .hero-slider-section {
-    height: 350px;
-  }
-  
-  .hero-title {
-    font-size: 24px;
-  }
-  
-  .hero-badge {
-    font-size: 10px;
-  }
   
   .sport-category-card {
     height: 250px;

@@ -1,0 +1,79 @@
+.top-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  background: linear-gradient(90deg, var(--color-primary) 0%, #8B0000 100%);
+  color: var(--color-surface);
+  padding: var(--space-xs) var(--space-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideDown 300ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.top-banner-content {
+  flex: 1;
+  text-align: center;
+}
+
+.banner-text {
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.3px;
+  animation: marquee 20s linear infinite;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.banner-close {
+  background: none;
+  border: none;
+  color: var(--color-surface);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 var(--space-sm);
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.banner-close:hover {
+  opacity: 1;
+}
+
+@media (max-width: 992px) {
+  .top-banner {
+    padding: 6px var(--space-sm);
+  }
+
+  .banner-text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-text {
+    font-size: 10px;
+  }
+
+  .top-banner {
+    padding: 5px var(--space-xs);
+  }
+
+  .banner-close {
+    font-size: 20px;
+  }
+}

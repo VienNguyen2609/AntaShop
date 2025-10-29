@@ -138,31 +138,7 @@ export default function HomePage() {
   return (
     <Layout>
       <div className="homepage">
-        <section className="hero-slider-section">
-          <div className="hero-slide active">
-            <img 
-              src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1600" 
-              alt="ANTA Running Collection"
-              className="hero-slide-image"
-            />
-            <div className="hero-slide-overlay"></div>
-            <div className="container">
-              <div className="hero-slide-content">
-                <span className="hero-badge">NEW COLLECTION</span>
-                <h1 className="hero-title">ANTA RUNNING PRO</h1>
-                <p className="hero-description">Đột phá giới hạn với công nghệ đệm mới nhất</p>
-                <div className="hero-actions">
-                  <button className="hero-button primary" onClick={() => navigate('/new')}>
-                    KHÁM PHÁ NGAY
-                  </button>
-                  <button className="hero-button secondary" onClick={() => navigate('/products')}>
-                    XEM BỘ SƯU TẬP
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HomeSlider />
 
         <DiscountCodes />
 

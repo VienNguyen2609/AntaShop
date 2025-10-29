@@ -6,7 +6,7 @@
   background: var(--color-surface);
   position: fixed;
   left: 0;
-  top: 0;
+  top: 36px;
   height: var(--header-height);
   z-index: 1000;
   box-shadow: var(--shadow-sm);

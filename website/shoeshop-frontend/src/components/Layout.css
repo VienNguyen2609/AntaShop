@@ -1,17 +1,16 @@
-/* Layout Component Styles */
 .layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--color-bg);
 }
 
 .layout-main {
   flex: 1;
-  padding-top: 0; /* Body already has padding-top: 80px */
+  padding-top: 0;
+  width: 100%;
 }
 
-/* Ensure content doesn't get hidden behind fixed header */
 .layout-main > * {
-  position: relative;
-  z-index: 1;
+  width: 100%;
 }

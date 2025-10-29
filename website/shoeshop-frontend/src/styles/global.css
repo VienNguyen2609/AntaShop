@@ -58,9 +58,9 @@
   padding: 0;
 }
 
-/* Body padding to account for fixed header */
+/* Body padding to account for fixed header and top banner */
 body {
-  padding-top: var(--header-height);
+  padding-top: calc(var(--header-height) + 36px);
   margin: 0;
   font-family: var(--font-family-base);
   -webkit-font-smoothing: antialiased;
@@ -348,6 +348,23 @@ a:focus-visible {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 992px) {
+  body {
+    padding-top: calc(var(--header-height) + 30px);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 90px;
+  }
 }
 
 /* Loading States */
