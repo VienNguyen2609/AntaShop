@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts';
-import { Header as Headers, Footer } from '../components';
+import { Layout } from '../components';
 import './CartPage.css';
 
 export default function CartPage() {
@@ -176,8 +176,8 @@ export default function CartPage() {
   };
 
   return (
-    <div className="cart-page">
-      <Headers />
+    <Layout>
+      <div className="cart-page">
       
       <div className="breadcrumbs">
         <div className="container">
@@ -194,7 +194,7 @@ export default function CartPage() {
               <span className="promo-icon">🚚</span>
               <span className="promo-text">Mua thêm</span>
               <span className="promo-amount">{(FREE_SHIPPING_THRESHOLD - totalPrice).toLocaleString()}₫</span>
-              <span className="promo-text">để được</span>
+              <span className="promo-text">đ�� được</span>
               <span className="promo-highlight">FREESHIP</span>
             </div>
           </div>
@@ -552,35 +552,7 @@ export default function CartPage() {
         </div>
       </div>
 
-      <Footer />
-
-      <div className="floating-buttons">
-        <button 
-          className="floating-btn cart"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          aria-label="Về đầu trang"
-          type="button"
-        >
-          🛒
-          {totalItems > 0 && <span className="floating-badge">{totalItems}</span>}
-        </button>
-        <button 
-          className="floating-btn phone" 
-          aria-label="Hotline"
-          type="button"
-          onClick={() => window.location.href = 'tel:1900xxxx'}
-        >
-          📞
-        </button>
-        <button 
-          className="floating-btn zalo" 
-          aria-label="Zalo"
-          type="button"
-          onClick={() => window.open('https://zalo.me', '_blank')}
-        >
-          Z
-        </button>
       </div>
-    </div>
+    </Layout>
   );
 }

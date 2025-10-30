@@ -7,26 +7,27 @@
   z-index: 1000;
   background: #FFFFFF;
   border-bottom: 1px solid #E5E5E5;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
   height: 80px;
 }
 
 .header-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 24px;
   height: 100%;
+  gap: 24px;
 }
 
 /* Header Left - Logo & Mobile Menu */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   flex-shrink: 0;
+  height: 100%;
 }
 
 .menu-toggle {
@@ -74,8 +75,11 @@
 .brand-logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: opacity 150ms ease;
+  height: 100%;
+  padding: 0 8px;
 }
 
 .brand-logo:hover {
@@ -83,55 +87,72 @@
 }
 
 .brand-logo svg {
-  height: 36px;
+  height: 42px;
   width: auto;
   display: block;
 }
 
+/* Header Search Container */
+.header-search-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-width: 600px;
+  margin: 0 24px;
+}
+
+.mobile-search-container {
+  display: none;
+}
+
 /* Header Navigation */
 .header-navigation {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .navigation-list {
   display: flex;
   align-items: center;
-  gap: 2px;
+  justify-content: center;
+  gap: 8px;
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 .navigation-item {
   position: relative;
   display: flex;
   align-items: center;
+  height: 100%;
 }
 
 .nav-item-link {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 12px 14px;
+  padding: 0 12px;
+  height: 100%;
   cursor: pointer;
-  border-radius: 6px;
-  transition: background-color 150ms ease;
+  transition: color 150ms ease;
   user-select: none;
 }
 
 .nav-item-link:hover {
-  background-color: #F7F7F7;
+  background-color: transparent;
 }
 
 .nav-item-text {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: #111111;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   white-space: nowrap;
   transition: color 150ms ease;
 }
@@ -161,7 +182,7 @@
 /* Navigation Dropdown */
 .navigation-dropdown {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   background: #FFFFFF;
@@ -171,6 +192,7 @@
   padding: 24px;
   min-width: 480px;
   z-index: 1001;
+  margin-top: 1px;
   animation: dropdownShow 200ms ease;
 }
 
@@ -215,15 +237,16 @@
   gap: 6px;
 }
 
-.column-item a {
+.column-item span {
   font-size: 13px;
   color: #6B6B6B;
   transition: color 150ms ease;
   display: block;
   padding: 3px 0;
+  cursor: pointer;
 }
 
-.column-item a:hover {
+.column-item span:hover {
   color: #D70010;
 }
 
@@ -231,8 +254,10 @@
 .header-right {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex-shrink: 0;
+  height: 100%;
+  padding-left: 8px;
 }
 
 .header-action {
@@ -240,8 +265,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   background: none;
   border: none;
   border-radius: 6px;
@@ -436,29 +461,51 @@
 /* Responsive Breakpoints */
 @media (max-width: 1200px) {
   .header-content {
-    padding: 0 24px;
+    padding: 0 20px;
+    gap: 16px;
+  }
+
+  .header-search-container {
+    max-width: 450px;
+    margin: 0 16px;
   }
 
   .navigation-list {
-    gap: 0;
+    gap: 4px;
   }
 
   .nav-item-link {
-    padding: 12px 11px;
+    padding: 0 10px;
   }
 
   .nav-item-text {
     font-size: 12px;
+    letter-spacing: 0.2px;
   }
 
   .navigation-dropdown {
     min-width: 420px;
+  }
+
+  .brand-logo svg {
+    height: 38px;
   }
 }
 
 @media (max-width: 992px) {
   .header-navigation {
     display: none;
+  }
+
+  .header-search-container {
+    display: none;
+  }
+
+  .mobile-search-container {
+    display: block;
+    padding: 12px 24px 16px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E5E5E5;
   }
 
   .menu-toggle {
@@ -493,6 +540,10 @@
     padding: 0 16px;
   }
 
+  .mobile-search-container {
+    padding: 12px 16px 16px;
+  }
+
   .mobile-menu-panel {
     max-width: 100%;
     border-radius: 0;
@@ -519,7 +570,6 @@
     gap: 4px;
   }
 
-  .search-action,
   .wishlist-action {
     display: none;
   }

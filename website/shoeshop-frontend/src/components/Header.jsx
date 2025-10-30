@@ -5,14 +5,13 @@ import { useCart, useAuth } from '../contexts';
 import SearchBar from './SearchBar';
 import { ROUTES, MENU_ITEMS } from '../constants';
 
-const Headers = () => {
+const Header = () => {
     const navigate = useNavigate();
     const { totalItems } = useCart();
     const { user, isAuthenticated, logout } = useAuth();
     const [activeDropdown, setActiveDropdown] = useState(null);
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    
+
     const menuData = MENU_ITEMS;
  
     const handlePushRouter = (link) => {
@@ -27,10 +26,6 @@ const Headers = () => {
 
     const handleMouseLeave = () => {
         setActiveDropdown(null);
-    };
-
-    const handleSearchToggle = () => {
-        setIsSearchOpen(!isSearchOpen);
     };
 
     const handleMobileMenuToggle = () => {
@@ -65,10 +60,14 @@ const Headers = () => {
                         </button>
                         
                         <div className="brand-logo" onClick={() => navigate(ROUTES.HOME)}>
-                            <svg width="110" height="36" viewBox="0 0 110 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <text x="5" y="26" fontFamily="Arial, sans-serif" fontSize="28" fontWeight="bold" fill="#D70010">ANTA</text>
+                            <svg width="120" height="42" viewBox="0 0 120 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <text x="5" y="30" fontFamily="Arial, sans-serif" fontSize="32" fontWeight="bold" fill="#D70010">ANTA</text>
                             </svg>
                         </div>
+                    </div>
+
+                    <div className="header-search-container">
+                        <SearchBar />
                     </div>
 
                     <nav className="header-navigation">
@@ -103,7 +102,7 @@ const Headers = () => {
                                                         <ul className="column-items">
                                                             {section.items.map((subItem, subIndex) => (
                                                                 <li key={subIndex} className="column-item">
-                                                                    <a href="#">{subItem}</a>
+                                                                    <span onClick={() => handlePushRouter(item.link)}>{subItem}</span>
                                                                 </li>
                                                             ))}
                                                         </ul>
@@ -118,16 +117,6 @@ const Headers = () => {
                     </nav>
 
                     <div className="header-right">
-                        <button 
-                            className="header-action search-action" 
-                            onClick={handleSearchToggle} 
-                            aria-label="Tìm kiếm"
-                        >
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M19 19L13.8 13.8M16 8.5C16 12.6421 12.6421 16 8.5 16C4.35786 16 1 12.6421 1 8.5C1 4.35786 4.35786 1 8.5 1C12.6421 1 16 4.35786 16 8.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                            </svg>
-                        </button>
-
                         <button 
                             className="header-action user-action" 
                             onClick={() => isAuthenticated ? navigate(ROUTES.ADMIN) : navigate(ROUTES.LOGIN)}
@@ -152,6 +141,10 @@ const Headers = () => {
                             <span className="action-count">{totalItems}</span>
                         </button>
                     </div>
+                </div>
+
+                <div className="mobile-search-container">
+                    <SearchBar />
                 </div>
             </header>
 
@@ -195,10 +188,8 @@ const Headers = () => {
                     </div>
                 </div>
             )}
-
-            <SearchBar isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         </>
     );
 };
 
-export default Headers;
+export default Header;

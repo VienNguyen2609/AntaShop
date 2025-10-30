@@ -81,7 +81,7 @@ export default function SearchPage() {
       category: 'Áo',
       brand: 'ANTA',
       sizes: ['M', 'L', 'XL'],
-      colors: ['Trắng', 'Đen'],
+      colors: ['Tr���ng', 'Đen'],
       badge: 'NEW'
     },
     {
@@ -172,13 +172,12 @@ export default function SearchPage() {
         </div>
 
         <div className="search-container">
-          <div className="container">
-            <div className="search-header">
-              <h1>Kết quả tìm kiếm {query && `cho "${query}"`}</h1>
-              <p className="result-count">{sortedProducts.length} sản phẩm</p>
-            </div>
+          <div className="search-header">
+            <h1>Kết quả tìm kiếm {query && `cho "${query}"`}</h1>
+            <p className="result-count">{sortedProducts.length} sản phẩm</p>
+          </div>
 
-            <div className="search-layout">
+          <div className="search-layout">
               <aside className="filters-sidebar">
                 <div className="filters-header">
                   <h3>Bộ lọc</h3>
@@ -317,12 +316,7 @@ export default function SearchPage() {
 
                 {sortedProducts.length === 0 ? (
                   <div className="no-results">
-                    <div className="no-results-icon">🔍</div>
-                    <h3>Không tìm thấy sản phẩm</h3>
-                    <p>Vui lòng thử lại với từ khóa khác hoặc điều chỉnh bộ lọc</p>
-                    <button className="clear-search-btn" onClick={clearFilters}>
-                      Xóa bộ lọc
-                    </button>
+                    <p>Không tìm thấy sản phẩm</p>
                   </div>
                 ) : (
                   <div className={`products-${viewMode}`}>
@@ -383,7 +377,6 @@ export default function SearchPage() {
                 )}
               </main>
             </div>
-          </div>
         </div>
       </div>
     </Layout>

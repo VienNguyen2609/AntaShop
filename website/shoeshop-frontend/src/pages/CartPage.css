@@ -979,71 +979,6 @@
   color: #059669;
 }
 
-.floating-buttons {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 999;
-}
-
-.floating-btn {
-  position: relative;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: none;
-  background: #ef4444;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.floating-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
-.floating-btn:active {
-  transform: scale(1.05);
-}
-
-.floating-btn.cart {
-  background: #ef4444;
-}
-
-.floating-btn.phone {
-  background: #10b981;
-}
-
-.floating-btn.zalo {
-  background: #0068ff;
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.floating-badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  background: #fbbf24;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 10px;
-  min-width: 20px;
-  text-align: center;
-}
-
 @media (max-width: 1024px) {
   .cart-layout {
     grid-template-columns: 1fr;
@@ -1347,28 +1282,6 @@
   .update-cart-btn {
     font-size: 13px;
     padding: 10px 20px;
-  }
-  
-  .floating-buttons {
-    bottom: 16px;
-    right: 16px;
-    gap: 10px;
-  }
-  
-  .floating-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 22px;
-  }
-  
-  .floating-btn.zalo {
-    font-size: 18px;
-  }
-  
-  .floating-badge {
-    font-size: 11px;
-    padding: 2px 5px;
-    min-width: 18px;
   }
   
   .coupon-section,
