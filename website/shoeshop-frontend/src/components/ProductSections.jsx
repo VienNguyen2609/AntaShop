@@ -8,7 +8,9 @@ const ProductSections = () => {
   const { addToCart } = useCart();
   const [activeCategory, setActiveCategory] = useState('shoes');
   const [activeGender, setActiveGender] = useState('nam');
+  const [activeSportswear, setActiveSportswear] = useState('ao-nam');
   const [favorites, setFavorites] = useState(new Set());
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Mock data for products
   const shoesData = {
@@ -91,7 +93,7 @@ const ProductSections = () => {
   };
 
   const sportswearData = {
-    ao: [
+    'ao-nam': [
       {
         id: 9,
         name: "Áo Phông Thể Thao Nam Running Anta",
@@ -129,10 +131,48 @@ const ProductSections = () => {
         model: "1525C5115-4"
       }
     ],
-    quan: [
+    'ao-nu': [
       {
-        id: 13,
-        name: "Quần Thể Thao Nam Short Anta",
+        id: 15,
+        name: "Áo Phông Thể Thao Nữ Running Anta",
+        price: 549000,
+        originalPrice: null,
+        discount: 0,
+        image: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5118-1"
+      },
+      {
+        id: 16,
+        name: "Áo Thể Thao Nữ Performance Anta",
+        price: 479000,
+        originalPrice: 599000,
+        discount: 20,
+        image: "https://images.pexels.com/photos/4498221/pexels-photo-4498221.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5119-2"
+      },
+      {
+        id: 17,
+        name: "Áo Tank Top Thể Thao Nữ Premium Anta",
+        price: 399000,
+        originalPrice: null,
+        discount: 0,
+        image: "https://images.pexels.com/photos/3757376/pexels-photo-3757376.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5120-3"
+      },
+      {
+        id: 18,
+        name: "Áo Khoác Thể Thao Nữ Active Anta",
+        price: 1799000,
+        originalPrice: 1999000,
+        discount: 10,
+        image: "https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5121-4"
+      }
+    ],
+    'quan-nam': [
+      {
+        id: 19,
+        name: "Quần Short Thể Thao Nam Anta",
         price: 799000,
         originalPrice: null,
         discount: 0,
@@ -140,19 +180,85 @@ const ProductSections = () => {
         model: "1525C5116-5"
       },
       {
-        id: 14,
-        name: "Quần Thể Thao Nam Long Anta",
+        id: 20,
+        name: "Quần Dài Thể Thao Nam Anta",
         price: 999000,
         originalPrice: null,
         discount: 0,
         image: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=400",
         model: "1525C5117-6"
+      },
+      {
+        id: 21,
+        name: "Quần Jogger Thể Thao Nam Premium Anta",
+        price: 1199000,
+        originalPrice: 1499000,
+        discount: 20,
+        image: "https://images.pexels.com/photos/1661471/pexels-photo-1661471.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5122-7"
+      },
+      {
+        id: 22,
+        name: "Quần Training Thể Thao Nam Anta",
+        price: 899000,
+        originalPrice: null,
+        discount: 0,
+        image: "https://images.pexels.com/photos/3764011/pexels-photo-3764011.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5123-8"
+      }
+    ],
+    'quan-nu': [
+      {
+        id: 23,
+        name: "Quần Short Thể Thao Nữ Anta",
+        price: 699000,
+        originalPrice: null,
+        discount: 0,
+        image: "https://images.pexels.com/photos/4498370/pexels-photo-4498370.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5124-9"
+      },
+      {
+        id: 24,
+        name: "Quần Dài Thể Thao Nữ Anta",
+        price: 899000,
+        originalPrice: 1099000,
+        discount: 18,
+        image: "https://images.pexels.com/photos/4498221/pexels-photo-4498221.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5125-10"
+      },
+      {
+        id: 25,
+        name: "Quần Legging Thể Thao Nữ Premium Anta",
+        price: 799000,
+        originalPrice: null,
+        discount: 0,
+        image: "https://images.pexels.com/photos/3775155/pexels-photo-3775155.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5126-11"
+      },
+      {
+        id: 26,
+        name: "Quần Jogger Thể Thao Nữ Anta",
+        price: 1099000,
+        originalPrice: 1299000,
+        discount: 15,
+        image: "https://images.pexels.com/photos/5710082/pexels-photo-5710082.jpeg?auto=compress&cs=tinysrgb&w=400",
+        model: "1525C5127-12"
       }
     ]
   };
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('vi-VN').format(price) + '₫';
+  };
+
+  const handleSportswearTabChange = (category) => {
+    if (category === activeSportswear) return;
+
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveSportswear(category);
+      setIsTransitioning(false);
+    }, 150);
   };
 
   const toggleFavorite = (e, productId) => {
@@ -303,14 +409,34 @@ const ProductSections = () => {
         </div>
         
         <div className="category-tabs">
-          <button className="tab-button active">Áo nam</button>
-          <button className="tab-button">Áo nữ</button>
-          <button className="tab-button">Quần nam</button>
-          <button className="tab-button">Quần nữ</button>
+          <button
+            className={`tab-button ${activeSportswear === 'ao-nam' ? 'active' : ''}`}
+            onClick={() => handleSportswearTabChange('ao-nam')}
+          >
+            Áo nam
+          </button>
+          <button
+            className={`tab-button ${activeSportswear === 'ao-nu' ? 'active' : ''}`}
+            onClick={() => handleSportswearTabChange('ao-nu')}
+          >
+            Áo nữ
+          </button>
+          <button
+            className={`tab-button ${activeSportswear === 'quan-nam' ? 'active' : ''}`}
+            onClick={() => handleSportswearTabChange('quan-nam')}
+          >
+            Quần nam
+          </button>
+          <button
+            className={`tab-button ${activeSportswear === 'quan-nu' ? 'active' : ''}`}
+            onClick={() => handleSportswearTabChange('quan-nu')}
+          >
+            Quần nữ
+          </button>
         </div>
-        
-        <div className="products-grid">
-          {sportswearData.ao.map(renderProductCard)}
+
+        <div className={`products-grid ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
+          {sportswearData[activeSportswear].map(renderProductCard)}
         </div>
         
         <div className="view-all-section">

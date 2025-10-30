@@ -1,5 +1,6 @@
 import React from 'react';
 import { TopBanner, Header, Footer } from './';
+import FloatingButtons from './FloatingButtons';
 import './Layout.css';
 
 const Layout = ({ children }) => {
@@ -11,6 +12,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
       <Footer />
+      <FloatingButtons />
     </div>
   );
 };

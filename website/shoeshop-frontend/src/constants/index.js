@@ -45,35 +45,36 @@ export const MENU_ITEMS = [
   { id: 2, name: "🔥 UP TO 50%", link: '/collections/san-pham-mega-sale', highlight: true },
   { id: 3, name: "HÀNG MỚI", link: '/new' },
   { id: 4, name: "ĐỘC QUYỀN ONLINE", link: '/exclusive' },
-  { 
-    id: 5, 
-    name: "NAM", 
+  {
+    id: 5,
+    name: "NAM",
     link: '/men',
     hasDropdown: true,
     dropdown: [
-      { title: "Giày", items: ["Chạy", "Tập luyện", "Lifestyle"] },
-      { title: "Quần áo", items: ["Áo thun", "Áo khoác", "Quần short"] },
-      { title: "Bộ sưu tập", items: ["Mega Sale", "Mới ra mắt"] }
+      { title: "GIÀY NAM", items: ["Giày chạy", "Giày bóng rổ", "Giày lifestyle", "Giày đế bằng"] },
+      { title: "QUẦN ÁO NAM", items: ["Áo thun", "Áo khoác", "Quần short", "Quần dài"] },
+      { title: "BỘ SƯU TẬP", items: ["PG7 Nam", "Running", "Training", "Basketball"] }
     ]
   },
-  { 
-    id: 6, 
-    name: "NỮ", 
+  {
+    id: 6,
+    name: "NỮ",
     link: '/women',
     hasDropdown: true,
     dropdown: [
-      { title: "Giày", items: ["Chạy", "Lifestyle"] },
-      { title: "Quần áo", items: ["Áo thun", "Áo khoác"] }
+      { title: "GIÀY NỮ", items: ["Giày chạy", "Giày lifestyle", "Giày thời trang"] },
+      { title: "QUẦN ÁO NỮ", items: ["Áo thun", "Áo khoác", "Quần short", "Quần dài"] },
+      { title: "BỘ SƯU TẬP", items: ["PG7 Nữ", "Running", "Training"] }
     ]
   },
-  { 
-    id: 7, 
-    name: "PHỤ KIỆN", 
+  {
+    id: 7,
+    name: "PHỤ KIỆN",
     link: '/accessories',
     hasDropdown: true,
     dropdown: [
-      { title: "Túi", items: ["Tote", "Đeo chéo"] },
-      { title: "Khác", items: ["Vớ", "Nón", "Dây giày"] }
+      { title: "TÚI & BALO", items: ["Balo thể thao", "Túi tote", "Túi đeo chéo"] },
+      { title: "PHỤ KIỆN KHÁC", items: ["Tất, vớ", "Mũ, nón", "Vợt cầu lông", "Phụ kiện giày"] }
     ]
   },
   { id: 8, name: "KIDS", link: '/kids' }

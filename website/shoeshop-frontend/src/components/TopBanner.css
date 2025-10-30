@@ -1,20 +1,22 @@
-.top-banner {
+/* ANTA Top Banner - Exact Match to anta.com.vn */
+.anta-top-banner {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1001;
-  background: linear-gradient(90deg, var(--color-primary) 0%, #8B0000 100%);
-  color: var(--color-surface);
-  padding: 8px var(--space-md);
+  background: linear-gradient(90deg, #D70010 0%, #A8000D 100%);
+  color: #FFFFFF;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-height: 36px;
-  animation: slideDown 300ms ease-out;
+  padding: 8px 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  animation: bannerFadeIn 200ms ease;
 }
 
-@keyframes slideDown {
+@keyframes bannerFadeIn {
   from {
     transform: translateY(-100%);
     opacity: 0;
@@ -25,60 +27,101 @@
   }
 }
 
-.top-banner-content {
+.banner-content {
   flex: 1;
   text-align: center;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.banner-text {
+.banner-message {
   font-size: 13px;
-  font-weight: var(--font-weight-medium);
+  font-weight: 600;
   letter-spacing: 0.3px;
   display: inline-block;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  animation: marqueeScroll 25s linear infinite;
+  padding: 0 20px;
 }
 
-.banner-close {
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(-10%);
+  }
+}
+
+.banner-message:hover {
+  animation-play-state: paused;
+}
+
+.banner-close-btn {
   background: none;
   border: none;
-  color: var(--color-surface);
+  color: #FFFFFF;
   font-size: 24px;
-  cursor: pointer;
-  padding: 0 var(--space-sm);
   line-height: 1;
-  opacity: 0.8;
-  transition: opacity var(--transition-fast);
+  cursor: pointer;
+  padding: 0 8px;
+  opacity: 0.9;
+  transition: all 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  flex-shrink: 0;
 }
 
-.banner-close:hover {
+.banner-close-btn:hover {
   opacity: 1;
+  background: rgba(255, 255, 255, 0.15);
 }
 
+/* Responsive Design */
 @media (max-width: 992px) {
-  .top-banner {
-    padding: 6px var(--space-sm);
+  .anta-top-banner {
+    min-height: 34px;
+    padding: 6px 12px;
   }
 
-  .banner-text {
+  .banner-message {
     font-size: 12px;
+  }
+
+  .banner-close-btn {
+    font-size: 22px;
+    width: 28px;
+    height: 28px;
   }
 }
 
 @media (max-width: 768px) {
-  .banner-text {
-    font-size: 11px;
-  }
-
-  .top-banner {
-    padding: 6px var(--space-xs);
+  .anta-top-banner {
     min-height: 32px;
+    padding: 6px 8px;
   }
 
-  .banner-close {
+  .banner-message {
+    font-size: 11px;
+    letter-spacing: 0.2px;
+  }
+
+  .banner-close-btn {
     font-size: 20px;
-    padding: 0 var(--space-xs);
+    width: 24px;
+    height: 24px;
+    padding: 0 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-message {
+    font-size: 10px;
   }
 }

@@ -128,6 +128,7 @@ export default function ProductListPage() {
           <div className="container">
             <div className="products-layout">
               <aside className="filters-sidebar">
+                <h2 className="sidebar-main-title">Bộ lọc</h2>
                 <div className="filter-section">
                   <h3 className="filter-title">Danh Mục</h3>
                   <div className="filter-options">

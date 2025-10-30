@@ -7,16 +7,16 @@ const TopBanner = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="top-banner">
-      <div className="top-banner-content">
-        <span className="banner-text">
-          🔥 KHUYẾN MÃI ĐẶC BIỆT: GIẢM GIÁ LÊN ĐẾN 50% - MIỄN PHÍ VẬN CHUYỂN CHO ĐƠN HÀNG TỪ 500K
+    <div className="anta-top-banner">
+      <div className="banner-content">
+        <span className="banner-message">
+          🔥 NHẬP MÃ: CAMP50 - GIẢM 10% CHO ĐƠN TỪ 500K | NHẬP MÃ: CAMP100 - GIẢM 100K CHO ĐƠN TỪ 1.599K | MIỄN PHÍ VẬN CHUYỂN
         </span>
       </div>
       <button
-        className="banner-close"
+        className="banner-close-btn"
         onClick={() => setIsVisible(false)}
-        aria-label="Close banner"
+        aria-label="Đóng thông báo"
       >
         ×
       </button>

@@ -56,18 +56,45 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.tab-button:hover::before {
+  width: 200%;
+  height: 200%;
 }
 
 .tab-button:hover {
   background: #f8f9fa;
   border-color: #dc2626;
   color: #dc2626;
+  transform: translateY(-2px);
 }
 
 .tab-button.active {
   background: #dc2626;
   color: white;
   border-color: #dc2626;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.tab-button.active:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
 }
 
 .product-sections .products-grid {
@@ -83,6 +110,29 @@
   margin-right: auto;
   padding-left: var(--space-xl);
   padding-right: var(--space-xl);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.product-sections .products-grid.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.4s ease;
+}
+
+.product-sections .products-grid.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .product-sections .product-card {

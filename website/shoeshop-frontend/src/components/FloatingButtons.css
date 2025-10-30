@@ -1,158 +1,231 @@
-.floating-buttons {
+.floating-buttons-container {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  bottom: 24px;
+  right: 24px;
   z-index: 999;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 12px;
 }
 
-.floating-btn {
+.floating-buttons-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.floating-buttons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideInUp 0.3s ease;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.floating-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 56px;
+  height: 56px;
+  justify-content: center;
+}
+
+.floating-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.floating-button svg {
+  flex-shrink: 0;
+}
+
+.button-label {
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.phone-button {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.phone-button:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.messenger-button {
+  background: linear-gradient(135deg, #0084FF 0%, #0066CC 100%);
+}
+
+.messenger-button:hover {
+  background: linear-gradient(135deg, #0066CC 0%, #0052A3 100%);
+}
+
+.zalo-button {
+  background: linear-gradient(135deg, #0180C7 0%, #0068A5 100%);
+}
+
+.zalo-button:hover {
+  background: linear-gradient(135deg, #0068A5 0%, #005283 100%);
+}
+
+.floating-button-toggle {
   width: 56px;
   height: 56px;
   border-radius: 50%;
+  background: linear-gradient(135deg, #D70010 0%, #B80010 100%);
   border: none;
+  box-shadow: 0 4px 16px rgba(215, 0, 16, 0.4);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
   transition: all 0.3s ease;
   position: relative;
-  color: white;
 }
 
-.floating-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+.floating-button-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(215, 0, 16, 0.5);
 }
 
-.floating-btn:active {
-  transform: translateY(-2px) scale(1.02);
+.floating-button-toggle:active {
+  transform: scale(0.95);
 }
 
-.floating-btn.scroll-top {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.floating-button-toggle svg {
+  transition: transform 0.3s ease;
 }
 
-.floating-btn.scroll-top:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+.floating-buttons-group.is-expanded .floating-button-toggle {
+  background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
 }
 
-.floating-btn.cart {
-  background: var(--color-primary);
-}
-
-.floating-btn.cart:hover {
-  background: #a00009;
-}
-
-.floating-btn.phone {
-  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-}
-
-.floating-btn.phone:hover {
-  background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
-}
-
-.floating-btn.zalo {
-  background: linear-gradient(135deg, #0068ff 0%, #0099ff 100%);
-  font-family: Arial, sans-serif;
-  font-size: 28px;
-}
-
-.floating-btn.zalo:hover {
-  background: linear-gradient(135deg, #0099ff 0%, #0068ff 100%);
-}
-
-.floating-badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  background: #ff4444;
-  color: white;
+.scroll-to-top-button {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  min-width: 24px;
-  height: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  border: 2px solid white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--color-dark);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scroll-to-top-button:hover {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(215, 0, 16, 0.3);
+}
+
+.scroll-to-top-button:active {
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
-  .floating-buttons {
-    right: 12px;
-    bottom: 12px;
-    gap: 10px;
+  .floating-buttons-container {
+    bottom: 16px;
+    right: 16px;
   }
 
-  .floating-btn {
-    width: 48px;
+  .floating-button {
+    padding: 10px 14px;
     height: 48px;
-    font-size: 20px;
+    min-width: 48px;
+    font-size: 13px;
   }
 
-  .floating-btn.zalo {
-    font-size: 24px;
+  .button-label {
+    font-size: 13px;
   }
 
-  .floating-badge {
-    min-width: 20px;
-    height: 20px;
-    font-size: 11px;
+  .floating-button-toggle {
+    width: 52px;
+    height: 52px;
+  }
+
+  .scroll-to-top-button {
+    width: 44px;
+    height: 44px;
   }
 }
 
 @media (max-width: 480px) {
-  .floating-buttons {
-    right: 8px;
-    bottom: 8px;
+  .floating-buttons-container {
+    bottom: 12px;
+    right: 12px;
   }
 
-  .floating-btn {
-    width: 44px;
+  .floating-button {
+    padding: 8px 12px;
     height: 44px;
-    font-size: 18px;
+    min-width: 44px;
+    font-size: 12px;
+    gap: 8px;
   }
 
-  .floating-btn.zalo {
-    font-size: 22px;
+  .button-label {
+    font-size: 12px;
   }
-}
 
-/* Animation for floating effect */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+  .floating-button-toggle {
+    width: 48px;
+    height: 48px;
   }
-  50% {
-    transform: translateY(-6px);
+
+  .floating-button-toggle svg {
+    width: 20px;
+    height: 20px;
   }
-}
 
-.floating-btn {
-  animation: float 3s ease-in-out infinite;
-}
+  .scroll-to-top-button {
+    width: 40px;
+    height: 40px;
+  }
 
-.floating-btn:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-.floating-btn:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-.floating-btn:nth-child(4) {
-  animation-delay: 0.9s;
-}
-
-.floating-btn:hover {
-  animation: none;
+  .scroll-to-top-button svg {
+    width: 20px;
+    height: 20px;
+  }
 }
