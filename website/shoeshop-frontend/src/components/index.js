@@ -12,6 +12,7 @@ export { default as ProductManagement } from './ProductManagement';
 export { default as ShippingManagement } from './ShippingManagement';
 export { default as AddProduct } from './AddProduct';
 export { default as TestCart } from './TestCart';
+export { default as FloatingButtons } from './FloatingButtons';
 
 // Overlay components
 export { default as MobileMenu } from './overlays/MobileMenu';

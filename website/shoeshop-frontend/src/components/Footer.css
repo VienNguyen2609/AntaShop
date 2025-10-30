@@ -170,12 +170,17 @@
   background: #333333;
 }
 
-.social-icon.search {
-  background: #666666;
+.social-icon.instagram {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
-.social-icon.search:hover {
-  background: #555555;
+.social-icon.instagram:hover {
+  filter: brightness(0.9);
+}
+
+.social-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .footer-bottom {

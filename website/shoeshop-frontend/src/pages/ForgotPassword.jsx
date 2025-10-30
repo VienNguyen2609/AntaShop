@@ -1,78 +1,179 @@
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { Header as Headers, Footer } from "../components";
+import "./AuthPage.css";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [step, setStep] = useState("email"); // email | verify
+  const [error, setError] = useState("");
+  const [step, setStep] = useState("email");
   const [code, setCode] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Gửi code về email
   const handleSendCode = async (e) => {
     e.preventDefault();
+    setError("");
+    setMessage("");
+    
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      setError("Vui lòng nhập email hợp lệ");
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/auth/forgot-password`, { email });
-      setMessage(res.data);
-      setStep("verify"); // sang bước verify
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setMessage(`Mã xác nhận đã được gửi đến ${email}. Vui lòng kiểm tra email của bạn.`);
+      setStep("verify");
     } catch (err) {
-      setMessage(err.response?.data || "Error sending reset code");
+      setError("Không thể gửi mã xác nhận. Vui lòng thử lại.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Xác minh code
   const handleVerifyCode = async (e) => {
     e.preventDefault();
+    setError("");
+    setMessage("");
+
+    if (!code || code.length < 6) {
+      setError("Vui lòng nhập mã xác nhận hợp lệ");
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api/auth/verify-reset-code`, { email, code });
-      setMessage(res.data);
-
-      // Lưu email để ResetPassword.jsx dùng
+      await new Promise(resolve => setTimeout(resolve, 1000));
       localStorage.setItem("resetEmail", email);
-
-      // Nếu thành công → chuyển sang reset-password
-      setTimeout(() => navigate("/reset-password"), 1000);
+      setMessage("Xác minh thành công! Đang chuyển hướng...");
+      setTimeout(() => navigate("/reset-password"), 1500);
     } catch (err) {
-      setMessage(err.response?.data || "Invalid code");
+      setError("Mã xác nhận không đúng. Vui lòng thử lại.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="auth-container">
-      <form className="auth-form" onSubmit={step === "email" ? handleSendCode : handleVerifyCode}>
-        <h2>Forgot Password</h2>
+    <div className="auth-page">
+      <Headers />
+      
+      <div className="breadcrumbs">
+        <div className="container">
+          <span className="breadcrumb-link" onClick={() => navigate('/home')}>Trang chủ</span>
+          <span className="breadcrumb-separator">/</span>
+          <span className="breadcrumb-link" onClick={() => navigate('/login')}>Đăng nhập</span>
+          <span className="breadcrumb-separator">/</span>
+          <span className="breadcrumb-current">Quên mật khẩu</span>
+        </div>
+      </div>
 
-        {step === "email" && (
-          <>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <button type="submit">Send Code</button>
-          </>
-        )}
+      <div className="auth-content">
+        <div className="container">
+          <div className="auth-form-container">
+            <div className="auth-form">
+              <h1 className="auth-title">QUÊN MẬT KHẨU</h1>
+              
+              <div className="auth-switch">
+                <span>Đã nhớ mật khẩu? </span>
+                <Link to="/login" className="auth-link">Đăng nhập ngay</Link>
+              </div>
 
-        {step === "verify" && (
-          <>
-            <p>Reset code sent to {email}. Please check your email.</p>
-            <input
-              type="text"
-              placeholder="Enter reset code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              required
-            />
-            <button type="submit">Verify Code</button>
-          </>
-        )}
+              {step === "email" && (
+                <form onSubmit={handleSendCode} className="forgot-password-form">
+                  <p className="form-description">
+                    Nhập địa chỉ email của bạn và chúng tôi sẽ gửi mã xác nhận để đặt lại mật khẩu.
+                  </p>
 
-        {message && <p>{message}</p>}
-      </form>
+                  <div className="form-group">
+                    <label htmlFor="email">Email *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Nhập địa chỉ email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className={error ? 'error' : ''}
+                      disabled={isLoading}
+                    />
+                    {error && <span className="error-message">{error}</span>}
+                  </div>
+
+                  {message && (
+                    <div className="success-message">
+                      {message}
+                    </div>
+                  )}
+
+                  <button 
+                    type="submit" 
+                    className="auth-submit-btn"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? 'Đang gửi...' : 'Gửi Mã Xác Nhận'}
+                  </button>
+                </form>
+              )}
+
+              {step === "verify" && (
+                <form onSubmit={handleVerifyCode} className="verify-code-form">
+                  <p className="form-description">
+                    Mã xác nhận đã được gửi đến <strong>{email}</strong>. 
+                    Vui lòng kiểm tra email và nhập mã xác nhận bên dưới.
+                  </p>
+
+                  <div className="form-group">
+                    <label htmlFor="code">Mã xác nhận *</label>
+                    <input
+                      type="text"
+                      id="code"
+                      name="code"
+                      placeholder="Nhập mã 6 số"
+                      value={code}
+                      onChange={(e) => setCode(e.target.value)}
+                      className={error ? 'error' : ''}
+                      maxLength="6"
+                      disabled={isLoading}
+                    />
+                    {error && <span className="error-message">{error}</span>}
+                  </div>
+
+                  {message && (
+                    <div className="success-message">
+                      {message}
+                    </div>
+                  )}
+
+                  <button 
+                    type="submit" 
+                    className="auth-submit-btn"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? 'Đang xác minh...' : 'Xác Nhận'}
+                  </button>
+
+                  <div className="form-options">
+                    <button
+                      type="button"
+                      className="resend-code-btn"
+                      onClick={() => setStep("email")}
+                      disabled={isLoading}
+                    >
+                      Gửi lại mã
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 }

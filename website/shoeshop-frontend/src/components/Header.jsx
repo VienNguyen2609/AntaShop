@@ -51,11 +51,9 @@ const Headers = () => {
                 <div className="header-container">
                     <div className="logo-container">
                         <div className="logo-link" onClick={() => navigate(ROUTES.HOME)}>
-                            <img 
-                                className="logo-image" 
-                                src="https://api.builder.io/api/v1/image/assets/TEMP/1d76ad4a5780ed1a3821e2acd80fe39e927b5bdc?width=300" 
-                                alt="logo Anta Việt Nam" 
-                            />
+                            <svg className="logo-image" width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <text x="10" y="28" fontFamily="Arial, sans-serif" fontSize="32" fontWeight="bold" fill="#D70010">ANTA</text>
+                            </svg>
                         </div>
                     </div>
 

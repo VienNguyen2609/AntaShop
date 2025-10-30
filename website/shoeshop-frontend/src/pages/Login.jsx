@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts';
-import { Header as Headers, Footer } from '../components';
+import { Header as Headers, Footer, FloatingButtons } from '../components';
 import './AuthPage.css';
 
 export default function Login() {
@@ -179,13 +179,7 @@ export default function Login() {
       </div>
 
       <Footer />
-
-      {/* Floating Action Buttons */}
-      <div className="floating-buttons">
-        <button className="floating-btn cart">🛒</button>
-        <button className="floating-btn phone">📞</button>
-        <button className="floating-btn zalo">Z</button>
-      </div>
+      <FloatingButtons />
     </div>
   );
 }

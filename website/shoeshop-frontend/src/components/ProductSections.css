@@ -158,8 +158,24 @@
   color: #dc2626;
 }
 
-.share-button:hover {
-  color: #2563eb;
+.heart-button.active {
+  background: #dc2626;
+  color: white;
+}
+
+.heart-button.active:hover {
+  background: #b91c1c;
+  color: white;
+  transform: scale(1.15);
+}
+
+.cart-button:hover {
+  color: #059669;
+  background: #f0fdf4;
+}
+
+.cart-button span {
+  font-size: 18px;
 }
 
 .online-badge {
@@ -298,21 +314,30 @@
     padding-left: var(--space-md);
     padding-right: var(--space-md);
   }
-  
+
   .product-card {
     max-width: 100%;
   }
-  
+
   .product-info {
     padding: 1.2rem;
   }
-  
+
   .product-name {
     font-size: 0.9rem;
   }
-  
+
   .current-price {
     font-size: 1.1rem;
+  }
+
+  .product-actions {
+    opacity: 1;
+  }
+
+  .action-button {
+    width: 36px;
+    height: 36px;
   }
 }
 

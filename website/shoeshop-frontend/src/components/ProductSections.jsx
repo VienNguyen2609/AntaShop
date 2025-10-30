@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../contexts';
 import './ProductSections.css';
 
 const ProductSections = () => {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [activeCategory, setActiveCategory] = useState('shoes');
   const [activeGender, setActiveGender] = useState('nam');
+  const [favorites, setFavorites] = useState(new Set());
 
   // Mock data for products
   const shoesData = {
@@ -14,7 +19,7 @@ const ProductSections = () => {
         price: 1259100,
         originalPrice: 1399000,
         discount: 10,
-        image: "https://via.placeholder.com/300x300?text=Product+1",
+        image: "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400",
         isOnline: false
       },
       {
@@ -23,7 +28,7 @@ const ProductSections = () => {
         price: 1599000,
         originalPrice: 1999000,
         discount: 20,
-        image: "https://via.placeholder.com/300x300?text=Product+2",
+        image: "https://images.pexels.com/photos/2529157/pexels-photo-2529157.jpeg?auto=compress&cs=tinysrgb&w=400",
         isOnline: true
       },
       {
@@ -32,7 +37,7 @@ const ProductSections = () => {
         price: 1899000,
         originalPrice: 2199000,
         discount: 14,
-        image: "https://via.placeholder.com/300x300?text=Product+3",
+        image: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&w=400",
         isOnline: true
       },
       {
@@ -41,7 +46,7 @@ const ProductSections = () => {
         price: 2199000,
         originalPrice: 2499000,
         discount: 12,
-        image: "https://via.placeholder.com/300x300?text=Product+4",
+        image: "https://images.pexels.com/photos/1619654/pexels-photo-1619654.jpeg?auto=compress&cs=tinysrgb&w=400",
         isOnline: false
       }
     ],
@@ -52,7 +57,7 @@ const ProductSections = () => {
         price: 1159100,
         originalPrice: 1299000,
         discount: 11,
-        image: "https://via.placeholder.com/300x300?text=Product+5",
+        image: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=400",
         isOnline: false
       },
       {
@@ -61,7 +66,7 @@ const ProductSections = () => {
         price: 1499000,
         originalPrice: 1799000,
         discount: 17,
-        image: "https://via.placeholder.com/300x300?text=Product+6",
+        image: "https://images.pexels.com/photos/1456705/pexels-photo-1456705.jpeg?auto=compress&cs=tinysrgb&w=400",
         isOnline: true
       },
       {
@@ -70,7 +75,7 @@ const ProductSections = () => {
         price: 1799000,
         originalPrice: 2099000,
         discount: 14,
-        image: "https://via.placeholder.com/300x300?text=Product+7",
+        image: "https://images.pexels.com/photos/2300334/pexels-photo-2300334.jpeg?auto=compress&cs=tinysrgb&w=400",
         isOnline: true
       },
       {
@@ -79,7 +84,7 @@ const ProductSections = () => {
         price: 2099000,
         originalPrice: 2399000,
         discount: 13,
-        image: "https://via.placeholder.com/300x300?text=Product+8",
+        image: "https://images.pexels.com/photos/1280064/pexels-photo-1280064.jpeg?auto=compress&cs=tinysrgb&w=400",
         isOnline: false
       }
     ]
@@ -93,7 +98,7 @@ const ProductSections = () => {
         price: 599000,
         originalPrice: null,
         discount: 0,
-        image: "https://via.placeholder.com/300x300?text=Shirt+1",
+        image: "https://images.pexels.com/photos/1232594/pexels-photo-1232594.jpeg?auto=compress&cs=tinysrgb&w=400",
         model: "1525C5112-1"
       },
       {
@@ -102,7 +107,7 @@ const ProductSections = () => {
         price: 499000,
         originalPrice: null,
         discount: 0,
-        image: "https://via.placeholder.com/300x300?text=Shirt+2",
+        image: "https://images.pexels.com/photos/8844893/pexels-photo-8844893.jpeg?auto=compress&cs=tinysrgb&w=400",
         model: "1525C5113-2"
       },
       {
@@ -111,7 +116,7 @@ const ProductSections = () => {
         price: 1359200,
         originalPrice: 1699000,
         discount: 20,
-        image: "https://via.placeholder.com/300x300?text=Shirt+3",
+        image: "https://images.pexels.com/photos/2112648/pexels-photo-2112648.jpeg?auto=compress&cs=tinysrgb&w=400",
         model: "1525C5114-3"
       },
       {
@@ -120,7 +125,7 @@ const ProductSections = () => {
         price: 1979100,
         originalPrice: 2199000,
         discount: 10,
-        image: "https://via.placeholder.com/300x300?text=Shirt+4",
+        image: "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=400",
         model: "1525C5115-4"
       }
     ],
@@ -131,7 +136,7 @@ const ProductSections = () => {
         price: 799000,
         originalPrice: null,
         discount: 0,
-        image: "https://via.placeholder.com/300x300?text=Pants+1",
+        image: "https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=400",
         model: "1525C5116-5"
       },
       {
@@ -140,7 +145,7 @@ const ProductSections = () => {
         price: 999000,
         originalPrice: null,
         discount: 0,
-        image: "https://via.placeholder.com/300x300?text=Pants+2",
+        image: "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=400",
         model: "1525C5117-6"
       }
     ]
@@ -150,16 +155,82 @@ const ProductSections = () => {
     return new Intl.NumberFormat('vi-VN').format(price) + '₫';
   };
 
+  const toggleFavorite = (e, productId) => {
+    e.stopPropagation();
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(productId)) {
+        newFavorites.delete(productId);
+      } else {
+        newFavorites.add(productId);
+      }
+      return newFavorites;
+    });
+  };
+
+  const handleAddToCart = (e, product) => {
+    e.stopPropagation();
+
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      image: product.image,
+      quantity: 1
+    };
+
+    addToCart(cartItem);
+
+    // Show confirmation
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: var(--color-success);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 10000;
+      animation: slideInRight 300ms ease-out;
+    `;
+    notification.textContent = '✓ Đã thêm vào giỏ hàng!';
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.remove();
+    }, 2000);
+  };
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   const renderProductCard = (product) => (
-    <div key={product.id} className="product-card">
+    <div
+      key={product.id}
+      className="product-card"
+      onClick={() => handleProductClick(product.id)}
+      style={{ cursor: 'pointer' }}
+    >
       <div className="product-image-container">
         <img src={product.image} alt={product.name} className="product-image" />
         <div className="product-actions">
-          <button className="action-button heart-button">
-            <span>♡</span>
+          <button
+            className={`action-button heart-button ${favorites.has(product.id) ? 'active' : ''}`}
+            onClick={(e) => toggleFavorite(e, product.id)}
+            title={favorites.has(product.id) ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}
+          >
+            <span>{favorites.has(product.id) ? '❤' : '♡'}</span>
           </button>
-          <button className="action-button share-button">
-            <span>🔗</span>
+          <button
+            className="action-button cart-button"
+            onClick={(e) => handleAddToCart(e, product)}
+            title="Thêm vào giỏ hàng"
+          >
+            <span>🛒</span>
           </button>
         </div>
         {product.isOnline && (

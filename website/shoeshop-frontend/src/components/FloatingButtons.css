@@ -1,0 +1,158 @@
+.floating-buttons {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.floating-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  color: white;
+}
+
+.floating-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.floating-btn:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.floating-btn.scroll-top {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.floating-btn.scroll-top:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.floating-btn.cart {
+  background: var(--color-primary);
+}
+
+.floating-btn.cart:hover {
+  background: #a00009;
+}
+
+.floating-btn.phone {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.floating-btn.phone:hover {
+  background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+}
+
+.floating-btn.zalo {
+  background: linear-gradient(135deg, #0068ff 0%, #0099ff 100%);
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+}
+
+.floating-btn.zalo:hover {
+  background: linear-gradient(135deg, #0099ff 0%, #0068ff 100%);
+}
+
+.floating-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .floating-buttons {
+    right: 12px;
+    bottom: 12px;
+    gap: 10px;
+  }
+
+  .floating-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .floating-btn.zalo {
+    font-size: 24px;
+  }
+
+  .floating-badge {
+    min-width: 20px;
+    height: 20px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-buttons {
+    right: 8px;
+    bottom: 8px;
+  }
+
+  .floating-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .floating-btn.zalo {
+    font-size: 22px;
+  }
+}
+
+/* Animation for floating effect */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.floating-btn {
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-btn:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.floating-btn:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.floating-btn:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+.floating-btn:hover {
+  animation: none;
+}
