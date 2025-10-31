@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,43 +20,57 @@ public class MomoService {
 
     @Value("${momo.partner-code}")
     private String PARTNER_CODE;
+
     @Value("${momo.access-key}")
     private String ACCESS_KEY;
+
     @Value("${momo.secret-key}")
     private String SECRET_KEY;
+
     @Value("${momo.return-url}")
     private String REDIRECT_URL;
+
     @Value("${momo.ipn-url}")
     private String IPN_URL;
-    @Value(value = "captureWallet")
+
+    @Value("${momo.request-type:captureWallet}")
     private String REQUEST_TYPE;
 
 
     private final MomoAPI momoAPI;
 
-    public CreateMomoResponse createQR() {
+    public CreateMomoResponse createQRForPayment(String requestId,
+                               Long amount, String orderId) {
 
+        String partnerOrderId = (orderId != null ) ? orderId.toString() : UUID.randomUUID().toString();
 
-        String orderId = UUID.randomUUID().toString();
-        String orderInfo = "Thanh toan don hang" + orderId;
-        String requestId = UUID.randomUUID().toString();
-        String extraData = "Khong co khuyen mai";
-        long amount = 100000;
+        String orderInfo = "Payment for order: " + partnerOrderId;
+
+        String extraData = "";
 
         String rawSignature = String.format(
-                "accessKey=%s&amount=%s&extraData=%s&ipnUrl=%s&orderId=%s&orderInfo=%s" +
-                        "&partnerCode=%s&redirectUrl=%s&requestId=%s&requestType=%s",
-                ACCESS_KEY, amount, extraData, IPN_URL, orderId, orderInfo,
-                PARTNER_CODE, REDIRECT_URL, requestId, REQUEST_TYPE
+                "accessKey=%s&amount=%s&extraData=%s&ipnUrl=%s&orderId=%s&orderInfo=%s&partnerCode=%s&redirectUrl=%s&requestId=%s&requestType=%s",
+                ACCESS_KEY,
+                amount,
+                extraData,
+                IPN_URL,
+                partnerOrderId,
+                orderInfo,
+                PARTNER_CODE,
+                REDIRECT_URL,
+                requestId,
+                REQUEST_TYPE
         );
+
+        log.info("🧾 [CREATE] Raw string before signing:\n{}", rawSignature);
 
         String prettySignnature = "" ;
         try {
             prettySignnature = signHmacSHA256(rawSignature, SECRET_KEY);
             log.info("Signature: {}", prettySignnature);
         }catch (Exception e){
-            log.error("Error while signing HMAC SHA256" + e);
-            return null;
+            log.error("Error while signing HMAC SHA256: {}" , e.getMessage() , e );
+            throw new RuntimeException("Error creating signature for Momo request", e);
         }
 
 
@@ -68,16 +82,64 @@ public class MomoService {
                 .partnerCode(PARTNER_CODE)
                 .requestType(REQUEST_TYPE)
                 .ipnUrl(IPN_URL)
-                .redirectUrl(REDIRECT_URL)
-                .orderId(orderId)
+                .orderId(partnerOrderId)
                 .amount(amount)
                 .orderInfo(orderInfo)
                 .requestId(requestId)
+                .redirectUrl(REDIRECT_URL)
                 .lang("vi")
                 .extraData(extraData)
                 .signature(prettySignnature)
+                .accessKey(ACCESS_KEY)
                 .build();
         return momoAPI.createMomoQR(createMomoRequest);
+    }
+
+
+    public boolean verifyIpnSignature(Map<String, String> params) {
+        // Momo gửi lên một số field, điển hình: partnerCode, accessKey, requestId, orderId, amount, orderInfo,
+        // orderType, transId, message, responseTime, resultCode, payType, signature
+        // thu tu phai dung theo doc momo ipn
+        List<String> orderedFields = Arrays.asList(
+                "partnerCode",
+                "accessKey",
+                "requestId",
+                "orderId",
+                "amount",
+                "orderInfo",
+                "orderType",
+                "transId",
+                "message",
+                "responseTime",
+                "resultCode",
+                "payType"
+        );
+
+        String raw = orderedFields.stream()
+                .map(key -> key + "=" + Objects.toString(params.getOrDefault(key, ""), ""))
+                .collect(Collectors.joining("&"));
+
+        log.info("📥 [IPN] Raw data received from MoMo:\n{}", raw);
+
+        String receivedSignature = params.get("signature");
+        if (receivedSignature == null) {
+            log.warn("IPN verify: no signature in params");
+            return false;
+        }
+
+        String computed;
+        try {
+            computed = signHmacSHA256(raw, SECRET_KEY);
+            log.info("🔐 [IPN] Computed Signature (server): {}", computed);
+            log.info("📩 [IPN] Received Signature (MoMo):  {}", receivedSignature);
+        } catch (Exception e) {
+            log.error("Error computing IPN signature", e);
+            return false;
+        }
+
+        boolean ok = computed.equals(receivedSignature);
+        log.info("IPN verify: computed == received ? {} (computed={}, received={})", ok, computed, receivedSignature);
+        return ok;
     }
 
     // HMAC SHA256 signing method
@@ -100,7 +162,4 @@ public class MomoService {
         return hexString.toString();
     }
 
-    public String handleIPN(Map<String, String> allParams) {
-       return momoAPI.handleIPN();
-    }
 }

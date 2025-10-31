@@ -1,6 +1,6 @@
 package org.anta.dto.response;
 
-import org.anta.entity.Role;
+import org.anta.enums.Role;
 import lombok.Data;
 @Data
 public class UserResponse {

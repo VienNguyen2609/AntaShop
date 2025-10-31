@@ -2,7 +2,7 @@ package org.anta.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
+import org.anta.enums.Role;
 
 @Entity
 @Table(name = "users")

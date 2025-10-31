@@ -5,6 +5,7 @@ import org.anta.dto.request.ProductVariantRequest;
 import org.anta.dto.response.ProductVariantResponse;
 import org.anta.entity.Product;
 import org.anta.entity.ProductVariant;
+import org.anta.exception.InsufficientStockException;
 import org.anta.mapper.ProductVariantMapper;
 import org.anta.repository.ProductRepository;
 import org.anta.repository.ProductVariantRepository;
@@ -28,7 +29,9 @@ public class ProductVariantService {
 
     @Transactional(readOnly = true)
     public ProductVariantResponse getById(Long id) {
-        ProductVariant v = productVariantRepository.findById(id).orElseThrow(() -> new RuntimeException("Variant not found"));
+
+        ProductVariant v = productVariantRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Variant not found"));
         return productVariantMapper.toResponse(v);
     }
 
@@ -42,20 +45,23 @@ public class ProductVariantService {
         }
 
         ProductVariant entity = productVariantMapper.toEntity(req);
+
         entity.setProduct(product);
+
         ProductVariant saved = productVariantRepository.save(entity);
+
         return productVariantMapper.toResponse(saved);
     }
 
     @Transactional
     public ProductVariantResponse update(Long id, ProductVariantRequest req) {
 
-        ProductVariant existing = productVariantRepository.findById(id).orElseThrow(()
-                    -> new RuntimeException("Variant not found"));
+        ProductVariant existing = productVariantRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Variant not found"));
 
         if (req.getProductId() != null && !req.getProductId().equals(existing.getProduct().getId())) {
-            Product newProduct = productRepository.findById(req.getProductId()).orElseThrow(()
-                    -> new RuntimeException("Product not found"));
+            Product newProduct = productRepository.findById(req.getProductId())
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
             existing.setProduct(newProduct);
         }
 
@@ -67,7 +73,24 @@ public class ProductVariantService {
 
     @Transactional
     public void delete(Long id) {
-        if (!productVariantRepository.existsById(id)) throw new RuntimeException("Variant not found");
+
+        if (!productVariantRepository.existsById(id)){
+            throw new RuntimeException("Variant not found");
+        }
         productVariantRepository.deleteById(id);
     }
+
+    @Transactional
+    public void reserveStock(Long variantId, int qty) {
+        int updated = productVariantRepository.reduceStockIfAvailable(variantId, qty);
+        if (updated == 0) {
+            throw new InsufficientStockException("Not enough stock for variant id " + variantId);
+        }
+    }
+
+    @Transactional
+    public void releaseStock(Long variantId, int qty) {
+        productVariantRepository.increaseStock(variantId, qty);
+    }
+
 }

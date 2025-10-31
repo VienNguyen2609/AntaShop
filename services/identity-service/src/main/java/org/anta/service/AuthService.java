@@ -1,8 +1,8 @@
 package org.anta.service;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.anta.dto.request.RegisterRequest;
-import org.anta.entity.Role;
+import org.anta.enums.Role;
 import org.anta.entity.User;
 import org.anta.repository.AuditLogRepository;
 import org.anta.repository.PasswordResetTokenRepository;
@@ -25,8 +25,7 @@ public class AuthService {
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final AuditLogRepository auditLogRepository;
 
-
-    // them 1 hàm gửi mã về email để tạo tài khoản, kiểm tra nếu nhập mã đúng thì mới cho tạo tài khoản
+    @Transactional
     public User register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new RuntimeException("Name is already exists");
@@ -42,8 +41,9 @@ public class AuthService {
         else user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
+        var saved = userRepository.save(user);
         auditLogRepository.save(AuditLog.builder()
-                .user(userRepository.save(user))
+                .user(saved)
                 .action("REGISTER_SUCCESS")
                 .ipAddress("N/A")
                 .userAgent("API_CALL")
@@ -52,6 +52,7 @@ public class AuthService {
         return userRepository.save(user);
     }
 
+    @Transactional
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -92,6 +93,7 @@ public class AuthService {
         return resetCode;
     }
 
+    @Transactional
     public boolean verifyResetCode(String email, String code) {
 
         var user = userRepository.findByEmail(email)
@@ -129,7 +131,6 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("Email not found"));
         user.setPassword(passwordEncoder.encode(newPassword));
 
-        // Xóa token reset sau khi đổi mật khẩu thành công
         passwordResetTokenRepository.markTokensAsUsedByUserId(user.getId());
 
         auditLogRepository.save(AuditLog.builder()

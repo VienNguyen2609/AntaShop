@@ -1,7 +1,9 @@
 package org.anta.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.anta.dto.request.ProductVariantRequest;
+import org.anta.dto.request.PurchaseItemRequest;
 import org.anta.dto.response.ProductVariantResponse;
 import org.anta.service.ProductVariantService;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +42,19 @@ public class ProductVariantController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         productVariantService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/reserve/id/{id}")
+    public ResponseEntity<?>  reserve(@PathVariable("id") Long id ,
+                                       @Valid @RequestBody PurchaseItemRequest purchaseItemRequest){
+        productVariantService.reserveStock(id , purchaseItemRequest.getQuantity());
+        return ResponseEntity.ok().body("reserve");
+    }
+
+    @PostMapping("/release/id/{id}")
+    public ResponseEntity<?> release(@PathVariable("id") Long id ,
+                                     @Valid @RequestBody PurchaseItemRequest purchaseItemRequest){
+        productVariantService.releaseStock(id,  purchaseItemRequest.getQuantity());
+        return ResponseEntity.ok().body("released");
     }
 }
