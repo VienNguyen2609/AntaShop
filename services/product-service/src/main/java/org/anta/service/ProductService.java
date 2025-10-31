@@ -8,6 +8,8 @@ import org.anta.mapper.ProductMapper;
 import org.anta.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,7 @@ public class ProductService {
     private final ProductMapper productMapper;
 
 
+    @Transactional
     public List<ProductResponse> getAllProduct(){
         return productRepository.findAll()
                 .stream()
@@ -33,38 +36,33 @@ public class ProductService {
         return productMapper.toResponse(product);
     }
 
+
+    @Transactional
     public ProductResponse addProduct(ProductRequest productRequest){
 
-        Product product = new Product();
-        product.setName(productRequest.getName());
-        product.setBrand(productRequest.getBrand());
-        product.setDescription(productRequest.getDescription());
-        product.setPrice(productRequest.getPrice());
-        product.setCategory(productRequest.getCategory());
-        product.setImages(productRequest.getImages() == null ? List.of() :
-                productRequest.getImages());
-        product.setCreatedAt(productRequest.getCreatedAt());
+        Product entity = productMapper.toEntity(productRequest);
 
-        return productMapper.toResponse(productRepository.save(product));
+        if (entity.getImages() == null) {
+            entity.setImages(List.of());
+        }
+
+        var saved = productRepository.save(entity);
+
+        return productMapper.toResponse(saved);
     }
 
+    @Transactional
     public ProductResponse updateProduct(Long id , ProductRequest productRequest){
+
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
 
-        product.setName(productRequest.getName());
-        product.setBrand(productRequest.getBrand());
-        product.setDescription(productRequest.getDescription());
-        product.setPrice(productRequest.getPrice());
-        product.setCategory(productRequest.getCategory());
-        product.setImages(productRequest.getImages() == null ? List.of() :
-                productRequest.getImages());
-        product.setCreatedAt(productRequest.getCreatedAt());
-
+        productMapper.updateFromRequest(productRequest, product);
         return productMapper.toResponse(productRepository.save(product));
     }
 
 
+    @Transactional
     public ProductResponse deleteProduct(Long id){
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));

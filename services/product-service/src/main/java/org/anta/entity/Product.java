@@ -3,6 +3,9 @@ package org.anta.entity;
 import org.anta.util.JsonListConverter;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,7 +26,7 @@ public class Product {
 
     private String description;
 
-    private Double price;
+    private BigDecimal price;
 
     private String category;
 
@@ -33,6 +36,6 @@ public class Product {
 
     @Column(name = "created_at", updatable = false, insertable = false,
             columnDefinition = "timestamp default current_timestamp")
-    private java.sql.Timestamp createdAt;
+    private LocalDateTime createdAt;
 
 }

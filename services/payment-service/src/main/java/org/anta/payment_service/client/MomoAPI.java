@@ -14,6 +14,6 @@ public interface MomoAPI {
     @PostMapping("/create")
     CreateMomoResponse createMomoQR(@RequestBody CreateMomoRequest request);
 
-    @GetMapping("/ipn-handler")
-    String handleIPN();
+//    @GetMapping("/ipn-handler")
+//    String handleIPN();
 }

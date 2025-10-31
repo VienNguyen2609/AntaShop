@@ -17,7 +17,7 @@ public class CreateMomoRequest {
 
     private String orderId;
 
-    private long amount;
+    private Long amount;
 
     private String orderInfo;
 
@@ -30,5 +30,7 @@ public class CreateMomoRequest {
     private String extraData;
 
     private String signature;
+
+    private String accessKey;
 
 }

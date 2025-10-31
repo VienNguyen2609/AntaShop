@@ -6,7 +6,7 @@ import org.anta.dto.request.ResetMailRequest;
 import jakarta.mail.MessagingException;
 
 
-public interface MaiService {
+public interface MailService {
 
     void sendSimpleEmail(MailRequest mailRequest);
 

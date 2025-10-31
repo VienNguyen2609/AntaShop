@@ -4,7 +4,7 @@ import org.anta.dto.request.HtmlMailRequest;
 import org.anta.dto.request.MailRequest;
 import org.anta.dto.request.ResetMailRequest;
 import org.anta.dto.response.MailResponse;
-import org.anta.service.MaiService;
+import org.anta.service.MailService;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class MailController {
 
-    private final MaiService maiService;
+    private final MailService mailService;
 
     @PostMapping("/send")
     public ResponseEntity<MailResponse> sendSimpleMail(@RequestBody @Valid MailRequest req) {
         try {
-            maiService.sendSimpleEmail(req);
+            mailService.sendSimpleEmail(req);
             return ResponseEntity.ok(new MailResponse(true ,
                     "Mail sent successfully" , null));
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class MailController {
     @PostMapping("/send-html")
     public ResponseEntity<MailResponse> sendMailByFormHTML(@RequestBody @Valid HtmlMailRequest htmlMailRequest) {
         try {
-            maiService.sendEmailByFormHTML(htmlMailRequest);
+            mailService.sendEmailByFormHTML(htmlMailRequest);
             return ResponseEntity.ok(new MailResponse(true ,
                     "HTML mail sent successfully" , null));
         } catch (MessagingException e) {
@@ -47,7 +47,7 @@ public class MailController {
     @PostMapping("/send-reset")
     public ResponseEntity<MailResponse> sendResetCode(@RequestBody @Valid ResetMailRequest resetMailRequest) {
         try {
-            maiService.sendResetCode(resetMailRequest);
+            mailService.sendResetCode(resetMailRequest);
             return ResponseEntity.ok(new MailResponse(true ,
                     "Reset code sent successfully" , null));
         } catch (Exception e) {

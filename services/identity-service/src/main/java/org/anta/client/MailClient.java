@@ -19,7 +19,7 @@ public class MailClient {
 
 
     public void sendRegistrationEmail(String to, String username) {
-        var url = "http://localhost:8082/api/mail/send-html";
+        var url = "http://localhost:8083/api/mail/send-html";
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -35,7 +35,7 @@ public class MailClient {
 
     public void sendResetCodeEmail(String to, String resetCode) {
 
-        var url = "http://localhost:8082/api/mail/send-reset";
+        var url = "http://localhost:8083/api/mail/send-reset";
 
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

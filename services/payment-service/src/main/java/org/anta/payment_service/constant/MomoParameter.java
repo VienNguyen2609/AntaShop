@@ -1,6 +1,6 @@
 package org.anta.payment_service.constant;
 
-// tham số momo
+
 public class MomoParameter {
 
     public static String PARTNER_CODE = "partnerCode";

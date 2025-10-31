@@ -8,6 +8,8 @@ import org.anta.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
+    @Transactional
     public List<UserResponse> getAllUsers() {
         return userRepository.findAll()
                 .stream()
@@ -34,6 +37,7 @@ public class UserService {
     }
 
 
+    @Transactional
     public UserResponse addUser(UserRequest req) {
         if (userRepository.existsByUsername(req.getUsername())) {
             throw new RuntimeException ("Username already exists");
@@ -52,6 +56,7 @@ public class UserService {
     }
 
 
+    @Transactional
     public UserResponse updateUser(Long id, UserRequest req) {
 
         User existing = userRepository.findById(id)
@@ -76,6 +81,8 @@ public class UserService {
         return userMapper.toResponse(saved);
     }
 
+
+    @Transactional
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
             throw new RuntimeException("User not found with id: " + id);
