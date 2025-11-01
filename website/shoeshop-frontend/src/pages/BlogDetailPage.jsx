@@ -73,36 +73,53 @@ export default function BlogDetailPage() {
     }
   ];
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('vi-VN', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  };
+
   return (
     <Layout>
-      <div className="blog-detail-page">
-        <div className="breadcrumbs">
+      <div className="detail-page">
+        <div className="detail-breadcrumbs">
           <div className="container">
-            <span className="breadcrumb-link" onClick={() => navigate('/home')}>Trang chủ</span>
+            <button className="breadcrumb-link" onClick={() => navigate('/home')}>Trang chủ</button>
             <span className="breadcrumb-separator">/</span>
-            <span className="breadcrumb-link" onClick={() => navigate('/blog')}>Tin tức</span>
+            <button className="breadcrumb-link" onClick={() => navigate('/blog')}>Tin tức</button>
             <span className="breadcrumb-separator">/</span>
-            <span className="breadcrumb-current">{post.title}</span>
+            <span className="breadcrumb-active">{post.title}</span>
           </div>
         </div>
 
-        <div className="blog-detail-container">
+        <div className="detail-content">
           <div className="container">
-            <article className="blog-article">
-              <header className="article-header">
+            <article className="article">
+              <header className="article-head">
                 <span className="article-category">{post.category}</span>
-                <h1 className="article-title">{post.title}</h1>
-                <div className="article-meta">
-                  <span className="meta-item">
-                    <span className="meta-icon">👤</span>
+                <h1 className="article-headline">{post.title}</h1>
+                <div className="article-info">
+                  <span className="info-item">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 8a3 3 0 100-6 3 3 0 000 6zM8 10c-3.866 0-7 2.015-7 4.5v.5h14v-.5c0-2.485-3.134-4.5-7-4.5z" fill="currentColor"/>
+                    </svg>
                     {post.author}
                   </span>
-                  <span className="meta-item">
-                    <span className="meta-icon">📅</span>
-                    {new Date(post.date).toLocaleDateString('vi-VN')}
+                  <span className="info-item">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M13.5 2h-11A1.5 1.5 0 001 3.5v9A1.5 1.5 0 002.5 14h11a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0013.5 2z" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M11 1v2M5 1v2M1 6h14" stroke="currentColor" strokeWidth="1.5"/>
+                    </svg>
+                    {formatDate(post.date)}
                   </span>
-                  <span className="meta-item">
-                    <span className="meta-icon">⏱️</span>
+                  <span className="info-item">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M8 4v4l3 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    </svg>
                     {post.readTime}
                   </span>
                 </div>
@@ -112,65 +129,83 @@ export default function BlogDetailPage() {
                 <img src={post.image} alt={post.title} />
               </div>
 
-              <div className="article-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+              <div className="article-body" dangerouslySetInnerHTML={{ __html: post.content }} />
 
-              <footer className="article-footer">
+              <footer className="article-foot">
                 <div className="article-tags">
-                  <span className="tag">ANTA</span>
-                  <span className="tag">Khuyến mãi</span>
-                  <span className="tag">Ưu đãi</span>
-                  <span className="tag">Thành viên</span>
+                  <span className="tag-item">ANTA</span>
+                  <span className="tag-item">Khuyến mãi</span>
+                  <span className="tag-item">Ưu đãi</span>
+                  <span className="tag-item">Thành viên</span>
                 </div>
 
                 <div className="article-share">
-                  <span className="share-label">Chia sẻ:</span>
-                  <button className="share-btn facebook">Facebook</button>
-                  <button className="share-btn twitter">Twitter</button>
-                  <button className="share-btn zalo">Zalo</button>
+                  <span className="share-text">Chia sẻ:</span>
+                  <button className="share-btn facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook
+                  </button>
+                  <button className="share-btn twitter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                    </svg>
+                    Twitter
+                  </button>
+                  <button className="share-btn zalo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 16.97c-.558.663-2.122 1.546-3.894 1.546-3.037 0-5.5-2.463-5.5-5.5S10.963 7.516 14 7.516c3.037 0 5.5 2.463 5.5 5.5 0 1.002-.27 1.94-.75 2.748l1.25 1.25-.106.956z"/>
+                    </svg>
+                    Zalo
+                  </button>
                 </div>
               </footer>
             </article>
 
-            <div className="related-posts-section">
-              <h2 className="section-title">Bài viết liên quan</h2>
-              <div className="related-posts-grid">
+            <div className="related-section">
+              <h2 className="related-title">Bài viết liên quan</h2>
+              <div className="related-grid">
                 {relatedPosts.map(relatedPost => (
                   <div
                     key={relatedPost.id}
-                    className="related-post-card"
-                    onClick={() => navigate(`/blog/${relatedPost.id}`)}
+                    className="related-item"
+                    onClick={() => {
+                      navigate(`/blog/${relatedPost.id}`);
+                      window.scrollTo(0, 0);
+                    }}
                   >
-                    <div className="related-post-image">
+                    <div className="related-thumb">
                       <img src={relatedPost.image} alt={relatedPost.title} />
                     </div>
-                    <div className="related-post-content">
-                      <span className="related-post-date">
-                        {new Date(relatedPost.date).toLocaleDateString('vi-VN')}
+                    <div className="related-text">
+                      <span className="related-date">
+                        {formatDate(relatedPost.date)}
                       </span>
-                      <h3 className="related-post-title">{relatedPost.title}</h3>
+                      <h3 className="related-heading">{relatedPost.title}</h3>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="comments-section">
-              <h2 className="section-title">Bình luận</h2>
+            <div className="comments-area">
+              <h2 className="comments-title">Bình luận</h2>
               <div className="comment-form">
                 <textarea
                   placeholder="Để lại bình luận của bạn..."
                   rows="4"
-                  className="comment-input"
+                  className="comment-textarea"
                 ></textarea>
-                <button className="submit-comment-btn">Gửi bình luận</button>
+                <button className="comment-submit">Gửi bình luận</button>
               </div>
 
               <div className="comments-list">
-                <div className="comment-item">
+                <div className="comment">
                   <div className="comment-avatar">N</div>
-                  <div className="comment-content">
+                  <div className="comment-body">
                     <div className="comment-header">
-                      <strong className="commenter-name">Nguyễn Văn A</strong>
+                      <strong className="comment-author">Nguyễn Văn A</strong>
                       <span className="comment-date">2 ngày trước</span>
                     </div>
                     <p className="comment-text">
@@ -179,11 +214,11 @@ export default function BlogDetailPage() {
                   </div>
                 </div>
 
-                <div className="comment-item">
+                <div className="comment">
                   <div className="comment-avatar">T</div>
-                  <div className="comment-content">
+                  <div className="comment-body">
                     <div className="comment-header">
-                      <strong className="commenter-name">Trần Thị B</strong>
+                      <strong className="comment-author">Trần Thị B</strong>
                       <span className="comment-date">3 ngày trước</span>
                     </div>
                     <p className="comment-text">
