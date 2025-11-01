@@ -194,8 +194,8 @@ export default function CartPage() {
               <span className="promo-icon">🚚</span>
               <span className="promo-text">Mua thêm</span>
               <span className="promo-amount">{(FREE_SHIPPING_THRESHOLD - totalPrice).toLocaleString()}₫</span>
-              <span className="promo-text">đ�� được</span>
-              <span className="promo-highlight">FREESHIP</span>
+              <span className="promo-text">để được</span>
+              <span className="promo-highlight">MIỄN PHÍ VẬN CHUYỂN</span>
             </div>
           </div>
         </div>
@@ -220,7 +220,7 @@ export default function CartPage() {
               <div className="empty-cart-illustration">
                 <div className="cart-basket">
                   <div className="basket-body">
-                    <div className="basket-smiley">🛒</div>
+                    <div className="basket-icon">🛒</div>
                   </div>
                   <div className="basket-handle"></div>
                 </div>
@@ -233,8 +233,8 @@ export default function CartPage() {
               </div>
               
               <div className="empty-cart-message">
-                <h2>"Hông" có gì trong giỏ hết</h2>
-                <p>Về trang cửa hàng để chọn mua sản phẩm bạn nhé!</p>
+                <h2>Giỏ hàng trống</h2>
+                <p>Hãy khám phá các sản phẩm tuyệt vời của chúng tôi!</p>
               </div>
               
               <button 

@@ -381,7 +381,7 @@ export default function MegaSale() {
               <div className="benefit-card">
                 <div className="benefit-icon">💳</div>
                 <h3>Thanh Toán Linh Hoạt</h3>
-                <p>Nhiều h��nh thức thanh toán</p>
+                <p>Nhiều hình thức thanh toán</p>
               </div>
               <div className="benefit-card">
                 <div className="benefit-icon">🔄</div>

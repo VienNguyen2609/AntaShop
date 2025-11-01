@@ -160,7 +160,7 @@ export default function ProductListPage() {
                         checked={selectedCategory === 'basketball'}
                         onChange={(e) => setSelectedCategory(e.target.value)}
                       />
-                      <span>Giày Bóng R���</span>
+                      <span>Giày Bóng Rổ</span>
                     </label>
                     <label className="filter-option">
                       <input
