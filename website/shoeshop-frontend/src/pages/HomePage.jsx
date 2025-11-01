@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout, HeroBanner, DiscountCodes, ProductSections } from "../components";
-import { HomeSlider, ProductGrid, BrandStrip, Lookbook } from "../components/home";
+import { HomeSlider, ProductGrid, BrandStrip, Lookbook, BlogTeasers } from "../components/home";
 import "./HomePage.css";
 
 export default function HomePage() {
@@ -76,7 +76,7 @@ export default function HomePage() {
     },
     {
       id: 8,
-      name: "Áo Khoác Thể Thao ANTA Windbreaker",
+      name: "��o Khoác Thể Thao ANTA Windbreaker",
       price: "1.359.000₫",
       originalPrice: "1.699.000₫",
       discount: "20%",
@@ -298,6 +298,8 @@ export default function HomePage() {
             <BrandStrip />
           </div>
         </section>
+
+        <BlogTeasers />
 
         <section className="newsletter-signup-section">
           <div className="container">
