@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Layout } from '../components';
 import { useCart } from '../contexts';
@@ -14,6 +14,9 @@ export default function ProductDetailPage() {
   const [selectedColor, setSelectedColor] = useState('black');
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+  const imageRef = useRef(null);
 
   const product = {
     id: id || 1,
@@ -70,6 +73,24 @@ export default function ProductDetailPage() {
   const calculateDiscount = () => {
     if (!product.originalPrice || product.originalPrice <= product.price) return 0;
     return Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!imageRef.current) return;
+    
+    const rect = imageRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    setZoomPosition({ x, y });
+  };
+
+  const handleMouseEnter = () => {
+    setIsZoomed(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsZoomed(false);
   };
 
   const relatedProducts = [
@@ -135,29 +156,43 @@ export default function ProductDetailPage() {
       <div className="pdp-page">
         <div className="pdp-breadcrumbs">
           <div className="container">
-            <button className="breadcrumb-item" onClick={() => navigate('/home')}>Trang chủ</button>
-            <span className="breadcrumb-divider">/</span>
-            <button className="breadcrumb-item" onClick={() => navigate('/products')}>Sản phẩm</button>
-            <span className="breadcrumb-divider">/</span>
-            <span className="breadcrumb-current">{product.name}</span>
+            <button className="breadcrumb-link" onClick={() => navigate('/home')}>Trang chủ</button>
+            <span className="breadcrumb-separator">/</span>
+            <button className="breadcrumb-link" onClick={() => navigate('/products')}>Sản phẩm</button>
+            <span className="breadcrumb-separator">/</span>
+            <span className="breadcrumb-active">{product.name}</span>
           </div>
         </div>
 
-        <div className="pdp-main-section">
+        <div className="pdp-main">
           <div className="container">
-            <div className="pdp-grid">
-              <div className="pdp-gallery-column">
-                <div className="gallery-main-image">
-                  <img src={product.images[selectedImage]} alt={product.name} />
+            <div className="pdp-layout">
+              <div className="pdp-gallery">
+                <div 
+                  className="gallery-main"
+                  ref={imageRef}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <img 
+                    src={product.images[selectedImage]} 
+                    alt={product.name}
+                    style={isZoomed ? {
+                      transform: 'scale(2)',
+                      transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                      cursor: 'zoom-in'
+                    } : {}}
+                  />
                   {discount > 0 && (
-                    <div className="image-badge">-{discount}%</div>
+                    <div className="discount-badge">-{discount}%</div>
                   )}
                 </div>
-                <div className="gallery-thumbnails">
+                <div className="gallery-thumbs">
                   {product.images.map((image, index) => (
                     <button
                       key={index}
-                      className={`thumbnail-item ${selectedImage === index ? 'is-active' : ''}`}
+                      className={`thumb-item ${selectedImage === index ? 'active' : ''}`}
                       onClick={() => setSelectedImage(index)}
                     >
                       <img src={image} alt={`${product.name} ${index + 1}`} />
@@ -166,82 +201,77 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              <div className="pdp-info-column">
-                <div className="product-brand-sku">
-                  <span className="product-brand-name">{product.brand}</span>
-                  <span className="product-sku-code">SKU: {product.sku}</span>
+              <div className="pdp-details">
+                <div className="product-header">
+                  <span className="brand-label">{product.brand}</span>
+                  <span className="sku-label">SKU: {product.sku}</span>
                 </div>
 
-                <h1 className="product-main-title">{product.name}</h1>
+                <h1 className="product-title">{product.name}</h1>
 
-                <div className="product-rating-section">
-                  <div className="rating-stars">
+                <div className="product-rating">
+                  <div className="stars">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <span
                         key={star}
-                        className={`star-icon ${star <= Math.floor(product.rating) ? 'is-filled' : ''}`}
+                        className={`star ${star <= Math.floor(product.rating) ? 'filled' : ''}`}
                       >
                         ★
                       </span>
                     ))}
                   </div>
-                  <span className="rating-count">({product.reviewCount} đánh giá)</span>
+                  <span className="rating-text">({product.reviewCount} đánh giá)</span>
                 </div>
 
-                <div className="product-price-block">
-                  <div className="price-row">
-                    <span className="price-current">{formatPrice(product.price)}</span>
+                <div className="price-section">
+                  <div className="price-main">
+                    <span className="current-price">{formatPrice(product.price)}</span>
                     {product.originalPrice > product.price && (
                       <>
-                        <span className="price-original">{formatPrice(product.originalPrice)}</span>
-                        <span className="price-discount-tag">-{discount}%</span>
+                        <span className="original-price">{formatPrice(product.originalPrice)}</span>
+                        <span className="discount-label">-{discount}%</span>
                       </>
                     )}
                   </div>
-                  <div className="stock-indicator">
+                  <div className="stock-status">
                     {product.inStock ? (
-                      <span className="stock-available">
+                      <span className="in-stock">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                           <path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         Còn hàng
                       </span>
                     ) : (
-                      <span className="stock-unavailable">Hết hàng</span>
+                      <span className="out-of-stock">Hết hàng</span>
                     )}
                   </div>
                 </div>
 
-                <div className="product-short-desc">
+                <div className="product-description">
                   <p>{product.description}</p>
                 </div>
 
-                <div className="product-variants-section">
-                  <div className="variant-group">
-                    <label className="variant-label">
+                <div className="product-options">
+                  <div className="option-group">
+                    <label className="option-label">
                       Màu sắc: 
-                      <span className="variant-selected-value">
+                      <span className="selected-value">
                         {product.colors.find(c => c.value === selectedColor)?.name}
                       </span>
                     </label>
-                    <div className="color-swatches">
+                    <div className="color-options">
                       {product.colors.map((color) => (
                         <button
                           key={color.value}
-                          className={`color-swatch ${selectedColor === color.value ? 'is-selected' : ''}`}
+                          className={`color-option ${selectedColor === color.value ? 'selected' : ''}`}
                           style={{ backgroundColor: color.hex }}
                           onClick={() => setSelectedColor(color.value)}
                           title={color.name}
                           aria-label={color.name}
                         >
-                          {selectedColor === color.value && color.value !== 'white' && (
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
-                              <path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          )}
-                          {selectedColor === color.value && color.value === 'white' && (
+                          {selectedColor === color.value && (
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                              <path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke={color.value === 'white' ? '#000' : '#fff'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                           )}
                         </button>
@@ -249,16 +279,16 @@ export default function ProductDetailPage() {
                     </div>
                   </div>
 
-                  <div className="variant-group">
-                    <label className="variant-label">
+                  <div className="option-group">
+                    <label className="option-label">
                       Kích thước: 
-                      {selectedSize && <span className="variant-selected-value">EU {selectedSize}</span>}
+                      {selectedSize && <span className="selected-value">EU {selectedSize}</span>}
                     </label>
-                    <div className="size-selector-grid">
+                    <div className="size-options">
                       {product.sizes.map((size) => (
                         <button
                           key={size}
-                          className={`size-button ${selectedSize === size ? 'is-selected' : ''}`}
+                          className={`size-option ${selectedSize === size ? 'selected' : ''}`}
                           onClick={() => setSelectedSize(size)}
                         >
                           {size}
@@ -267,11 +297,11 @@ export default function ProductDetailPage() {
                     </div>
                   </div>
 
-                  <div className="variant-group">
-                    <label className="variant-label">Số lượng:</label>
-                    <div className="quantity-controls">
+                  <div className="option-group">
+                    <label className="option-label">Số lượng:</label>
+                    <div className="quantity-selector">
                       <button
-                        className="quantity-button"
+                        className="qty-btn"
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
                         aria-label="Giảm số lượng"
                       >
@@ -279,13 +309,13 @@ export default function ProductDetailPage() {
                       </button>
                       <input
                         type="number"
-                        className="quantity-input-field"
+                        className="qty-input"
                         value={quantity}
                         onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                         min="1"
                       />
                       <button
-                        className="quantity-button"
+                        className="qty-btn"
                         onClick={() => setQuantity(quantity + 1)}
                         aria-label="Tăng số lượng"
                       >
@@ -295,22 +325,22 @@ export default function ProductDetailPage() {
                   </div>
                 </div>
 
-                <div className="product-cta-buttons">
-                  <button className="cta-buy-now" onClick={handleBuyNow}>
+                <div className="action-buttons">
+                  <button className="btn-buy-now" onClick={handleBuyNow}>
                     MUA NGAY
                   </button>
-                  <button className="cta-add-to-cart" onClick={handleAddToCart}>
+                  <button className="btn-add-cart" onClick={handleAddToCart}>
                     THÊM VÀO GIỎ
                   </button>
-                  <button className="cta-wishlist" aria-label="Thêm vào yêu thích">
+                  <button className="btn-wishlist" aria-label="Thêm vào yêu thích">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                     </svg>
                   </button>
                 </div>
 
-                <div className="product-benefits-list">
-                  <div className="benefit-item">
+                <div className="benefits-list">
+                  <div className="benefit">
                     <div className="benefit-icon">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <rect x="1" y="3" width="15" height="13"></rect>
@@ -319,31 +349,31 @@ export default function ProductDetailPage() {
                         <circle cx="18.5" cy="18.5" r="2.5"></circle>
                       </svg>
                     </div>
-                    <div className="benefit-text">
-                      <strong>Miễn phí vận chuy���n</strong>
+                    <div className="benefit-content">
+                      <strong>Miễn phí vận chuyển</strong>
                       <span>Đơn hàng từ 999.000₫</span>
                     </div>
                   </div>
-                  <div className="benefit-item">
+                  <div className="benefit">
                     <div className="benefit-icon">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <polyline points="23 4 23 10 17 10"></polyline>
                         <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                       </svg>
                     </div>
-                    <div className="benefit-text">
+                    <div className="benefit-content">
                       <strong>Đổi trả trong 30 ngày</strong>
                       <span>Miễn phí đổi size</span>
                     </div>
                   </div>
-                  <div className="benefit-item">
+                  <div className="benefit">
                     <div className="benefit-icon">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
                       </svg>
                     </div>
-                    <div className="benefit-text">
+                    <div className="benefit-content">
                       <strong>Chính hãng 100%</strong>
                       <span>Cam kết hàng chính hãng</span>
                     </div>
@@ -354,51 +384,51 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        <div className="pdp-tabs-section">
+        <div className="pdp-tabs">
           <div className="container">
-            <div className="tabs-navigation">
+            <div className="tabs-nav">
               <button
-                className={`tab-nav-button ${activeTab === 'description' ? 'is-active' : ''}`}
+                className={`tab-btn ${activeTab === 'description' ? 'active' : ''}`}
                 onClick={() => setActiveTab('description')}
               >
                 Mô tả sản phẩm
               </button>
               <button
-                className={`tab-nav-button ${activeTab === 'specifications' ? 'is-active' : ''}`}
+                className={`tab-btn ${activeTab === 'specifications' ? 'active' : ''}`}
                 onClick={() => setActiveTab('specifications')}
               >
                 Thông số kỹ thuật
               </button>
               <button
-                className={`tab-nav-button ${activeTab === 'reviews' ? 'is-active' : ''}`}
+                className={`tab-btn ${activeTab === 'reviews' ? 'active' : ''}`}
                 onClick={() => setActiveTab('reviews')}
               >
                 Đánh giá ({product.reviewCount})
               </button>
             </div>
 
-            <div className="tabs-content-area">
+            <div className="tabs-content">
               {activeTab === 'description' && (
-                <div className="tab-content-panel">
-                  <h3 className="content-heading">Giới thiệu sản phẩm</h3>
-                  <p className="content-paragraph">{product.description}</p>
-                  <h4 className="content-subheading">Đặc điểm nổi bật</h4>
-                  <ul className="content-feature-list">
+                <div className="tab-panel">
+                  <h3 className="panel-heading">Giới thiệu sản phẩm</h3>
+                  <p className="panel-text">{product.description}</p>
+                  <h4 className="panel-subheading">Đặc điểm nổi bật</h4>
+                  <ul className="features-list">
                     {product.features.map((feature, index) => (
-                      <li key={index} className="feature-list-item">{feature}</li>
+                      <li key={index}>{feature}</li>
                     ))}
                   </ul>
                 </div>
               )}
 
               {activeTab === 'specifications' && (
-                <div className="tab-content-panel">
-                  <h3 className="content-heading">Thông số kỹ thuật</h3>
+                <div className="tab-panel">
+                  <h3 className="panel-heading">Thông số kỹ thuật</h3>
                   <table className="specs-table">
                     <tbody>
                       {Object.entries(product.specifications).map(([key, value]) => (
-                        <tr key={key} className="spec-row">
-                          <td className="spec-key">{key}</td>
+                        <tr key={key}>
+                          <td className="spec-label">{key}</td>
                           <td className="spec-value">{value}</td>
                         </tr>
                       ))}
@@ -408,49 +438,49 @@ export default function ProductDetailPage() {
               )}
 
               {activeTab === 'reviews' && (
-                <div className="tab-content-panel">
-                  <h3 className="content-heading">Đánh giá từ khách hàng</h3>
-                  <div className="reviews-summary-card">
-                    <div className="summary-rating">
-                      <span className="summary-score">{product.rating}</span>
-                      <div className="summary-stars">
+                <div className="tab-panel">
+                  <h3 className="panel-heading">Đánh giá từ khách hàng</h3>
+                  <div className="reviews-summary">
+                    <div className="summary-score">
+                      <span className="score-number">{product.rating}</span>
+                      <div className="score-stars">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <span
                             key={star}
-                            className={`star-icon ${star <= Math.floor(product.rating) ? 'is-filled' : ''}`}
+                            className={`star ${star <= Math.floor(product.rating) ? 'filled' : ''}`}
                           >
                             ★
                           </span>
                         ))}
                       </div>
-                      <span className="summary-count">{product.reviewCount} đánh giá</span>
+                      <span className="score-count">{product.reviewCount} đánh giá</span>
                     </div>
                   </div>
                   <div className="reviews-list">
-                    <div className="review-card">
-                      <div className="review-header-row">
+                    <div className="review-item">
+                      <div className="review-header">
                         <strong className="reviewer-name">Nguyễn Văn A</strong>
-                        <div className="review-stars-small">
+                        <div className="review-stars">
                           {[1, 2, 3, 4, 5].map((star) => (
-                            <span key={star} className="star-icon is-filled">★</span>
+                            <span key={star} className="star filled">★</span>
                           ))}
                         </div>
                       </div>
-                      <p className="review-comment">Giày rất đẹp và chất lượng. Đi rất êm chân, phù hợp cho chạy bộ hàng ngày.</p>
-                      <span className="review-timestamp">2 ngày trước</span>
+                      <p className="review-text">Giày rất đẹp và chất lượng. Đi rất êm chân, phù hợp cho chạy bộ hàng ngày.</p>
+                      <span className="review-time">2 ngày trước</span>
                     </div>
-                    <div className="review-card">
-                      <div className="review-header-row">
+                    <div className="review-item">
+                      <div className="review-header">
                         <strong className="reviewer-name">Trần Thị B</strong>
-                        <div className="review-stars-small">
+                        <div className="review-stars">
                           {[1, 2, 3, 4].map((star) => (
-                            <span key={star} className="star-icon is-filled">★</span>
+                            <span key={star} className="star filled">★</span>
                           ))}
-                          <span className="star-icon">★</span>
+                          <span className="star">★</span>
                         </div>
                       </div>
-                      <p className="review-comment">Sản phẩm tốt, giao hàng nhanh. Tuy nhiên size hơi bé so với mô tả.</p>
-                      <span className="review-timestamp">1 tuần trước</span>
+                      <p className="review-text">Sản phẩm tốt, giao hàng nhanh. Tuy nhiên size hơi bé so với mô tả.</p>
+                      <span className="review-time">1 tuần trước</span>
                     </div>
                   </div>
                 </div>
@@ -459,26 +489,26 @@ export default function ProductDetailPage() {
           </div>
         </div>
 
-        <div className="pdp-related-section">
+        <div className="pdp-related">
           <div className="container">
-            <h2 className="related-section-title">Sản phẩm liên quan</h2>
-            <div className="related-products-grid">
+            <h2 className="section-title">Sản phẩm liên quan</h2>
+            <div className="related-grid">
               {relatedProducts.map((item) => (
                 <div
                   key={item.id}
-                  className="related-product-card"
+                  className="related-card"
                   onClick={() => {
                     navigate(`/product/${item.id}`);
                     window.scrollTo(0, 0);
                   }}
                 >
-                  <div className="related-product-image">
+                  <div className="related-image">
                     <img src={item.image} alt={item.name} />
                   </div>
-                  <div className="related-product-details">
-                    <h3 className="related-product-name">{item.name}</h3>
-                    <div className="related-product-price">
-                      <span className="related-price-value">{formatPrice(item.price)}</span>
+                  <div className="related-info">
+                    <h3 className="related-name">{item.name}</h3>
+                    <div className="related-price">
+                      <span>{formatPrice(item.price)}</span>
                     </div>
                   </div>
                 </div>
