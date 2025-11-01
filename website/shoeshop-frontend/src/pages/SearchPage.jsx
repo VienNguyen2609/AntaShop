@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { Layout } from '../components';
 import './SearchPage.css';
 
@@ -165,7 +165,7 @@ export default function SearchPage() {
       <div className="search-page">
         <div className="breadcrumbs">
           <div className="container">
-            <span className="breadcrumb-link" onClick={() => navigate('/home')}>Trang chủ</span>
+            <Link to="/home" className="breadcrumb-link">Trang chủ</Link>
             <span className="breadcrumb-separator">/</span>
             <span className="breadcrumb-current">Tìm kiếm</span>
           </div>

@@ -24,6 +24,7 @@
 
 .breadcrumb-link:hover {
   color: #111827;
+  text-decoration: underline;
 }
 
 .breadcrumb-separator {
@@ -254,8 +255,8 @@
 }
 
 .shop-now-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.35);
 }
 
 .shop-now-btn:active {
@@ -318,8 +319,10 @@
 }
 
 .clear-cart-btn:hover {
-  background: #fef2f2;
-  border-color: #ef4444;
+  background: #f9fafb;
+  border-color: var(--color-dark);
+  color: var(--color-dark);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .clear-cart-btn .icon {
@@ -377,6 +380,7 @@
 
 .cart-item:hover {
   background: #f9fafb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .col-product {
@@ -403,7 +407,7 @@
 }
 
 .item-image:hover img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .item-info {
@@ -490,7 +494,7 @@
 }
 
 .qty-btn:hover {
-  background: #ef4444;
+  background: var(--color-dark);
   color: #fff;
 }
 
@@ -542,9 +546,10 @@
 }
 
 .remove-btn:hover {
-  border-color: #ef4444;
-  background: #fef2f2;
-  color: #ef4444;
+  border-color: var(--color-dark);
+  background: #f3f4f6;
+  color: var(--color-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .cart-actions-bottom {
@@ -578,6 +583,8 @@
 .update-cart-btn:hover {
   border-color: #111827;
   color: #111827;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .cart-sidebar {
@@ -644,6 +651,8 @@
 
 .apply-coupon-btn:hover {
   background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3);
 }
 
 .apply-coupon-btn:active {
@@ -705,8 +714,8 @@
 }
 
 .remove-coupon-btn:hover {
-  background: #fee2e2;
-  color: #ef4444;
+  background: #f3f4f6;
+  color: var(--color-dark);
 }
 
 .coupon-error {
@@ -746,8 +755,9 @@
 }
 
 .available-coupon-item:hover {
-  border-color: #ef4444;
-  background: #fef2f2;
+  border-color: var(--color-dark);
+  background: #f9fafb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .coupon-code-tag {
@@ -785,6 +795,7 @@
 
 .shipping-option:hover {
   border-color: #d1d5db;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .shipping-option input[type="radio"] {
@@ -927,8 +938,8 @@
 }
 
 .checkout-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.35);
 }
 
 .checkout-btn:active {

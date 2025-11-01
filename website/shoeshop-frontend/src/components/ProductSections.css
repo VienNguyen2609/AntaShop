@@ -20,7 +20,7 @@
 }
 
 .section-title-button {
-  background: #dc2626;
+  background: var(--color-primary);
   color: white;
   border: none;
   padding: 1rem 3rem;
@@ -29,13 +29,13 @@
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 4px 15px rgba(215, 0, 16, 0.2);
 }
 
 .section-title-button:hover {
-  background: #b91c1c;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  background: #B80010;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(215, 0, 16, 0.3);
 }
 
 .category-tabs {
@@ -68,7 +68,7 @@
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(220, 38, 38, 0.1);
+  background: rgba(0, 0, 0, 0.03);
   transform: translate(-50%, -50%);
   transition: width 0.4s ease, height 0.4s ease;
 }
@@ -80,21 +80,23 @@
 
 .tab-button:hover {
   background: #f8f9fa;
-  border-color: #dc2626;
-  color: #dc2626;
+  border-color: var(--color-dark);
+  color: var(--color-dark);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .tab-button.active {
-  background: #dc2626;
+  background: var(--color-primary);
   color: white;
-  border-color: #dc2626;
-  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(215, 0, 16, 0.25);
 }
 
 .tab-button.active:hover {
-  background: #b91c1c;
+  background: #B80010;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(215, 0, 16, 0.3);
 }
 
 .product-sections .products-grid {
@@ -149,8 +151,8 @@
 
 .product-sections .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-  border-color: transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border-color: var(--color-muted);
 }
 
 .product-image-container {
@@ -205,23 +207,26 @@
 }
 
 .heart-button:hover {
-  color: #dc2626;
+  color: var(--color-dark);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .heart-button.active {
-  background: #dc2626;
+  background: var(--color-primary);
   color: white;
 }
 
 .heart-button.active:hover {
-  background: #b91c1c;
+  background: #B80010;
   color: white;
-  transform: scale(1.15);
+  transform: scale(1.12);
+  box-shadow: 0 4px 12px rgba(215, 0, 16, 0.3);
 }
 
 .cart-button:hover {
-  color: #059669;
-  background: #f0fdf4;
+  color: var(--color-dark);
+  background: rgba(0, 0, 0, 0.05);
+  transform: scale(1.05);
 }
 
 .cart-button span {
@@ -232,7 +237,7 @@
   position: absolute;
   top: 1rem;
   left: 1rem;
-  background: #dc2626;
+  background: var(--color-primary);
   color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
@@ -280,7 +285,7 @@
 .current-price {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #dc2626;
+  color: var(--color-primary);
 }
 
 .original-price {
@@ -290,7 +295,7 @@
 }
 
 .discount-badge {
-  background: #dc2626;
+  background: var(--color-primary);
   color: white;
   padding: 0.2rem 0.6rem;
   border-radius: 12px;
@@ -321,6 +326,7 @@
 .view-all-button:hover {
   background: #4b5563;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(75, 85, 99, 0.3);
 }
 
 /* Responsive Design */

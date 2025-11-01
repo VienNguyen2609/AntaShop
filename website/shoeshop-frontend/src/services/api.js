@@ -32,10 +32,11 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired, redirect to login
+      // Token expired, clear storage and let AuthContext handle redirect
       localStorage.removeItem(STORAGE_KEYS.TOKEN);
       localStorage.removeItem(STORAGE_KEYS.USER);
-      window.location.href = '/login';
+      // Dispatch custom event for AuthContext to handle navigation
+      window.dispatchEvent(new CustomEvent('auth:logout'));
     }
     return Promise.reject(error);
   }

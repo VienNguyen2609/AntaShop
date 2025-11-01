@@ -112,6 +112,7 @@
 .close-btn:hover {
   background: #f3f4f6;
   color: #111827;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .drawer-body {
@@ -167,6 +168,8 @@
 .mobile-menu-item:hover {
   background: #f3f4f6;
   color: #111827;
+  transform: translateX(4px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .empty-mini-cart {
@@ -204,7 +207,8 @@
 
 .shop-btn:hover {
   background: #dc2626;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3);
 }
 
 .mini-cart-items {
@@ -226,6 +230,7 @@
 
 .mini-cart-item:hover {
   background: #f3f4f6;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .mini-item-image {
@@ -303,7 +308,7 @@
 }
 
 .mini-qty-btn:hover {
-  background: #ef4444;
+  background: var(--color-dark);
   color: #fff;
 }
 
@@ -341,8 +346,8 @@
 }
 
 .mini-remove-btn:hover {
-  background: #fee2e2;
-  color: #ef4444;
+  background: #f3f4f6;
+  color: var(--color-dark);
 }
 
 .mini-cart-total {
@@ -391,6 +396,8 @@
 .view-cart-btn:hover {
   border-color: #111827;
   color: #111827;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .checkout-btn-mini {
@@ -400,8 +407,8 @@
 }
 
 .checkout-btn-mini:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
 }
 
 .checkout-btn-mini:active {

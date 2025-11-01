@@ -85,8 +85,9 @@
 }
 
 .footer-link:hover {
-  opacity: 0.8;
-  text-decoration: underline;
+  opacity: 0.9;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
 }
 
 /* Links Sections */
@@ -113,7 +114,8 @@
 }
 
 .link-text:hover {
-  color: #D70010;
+  color: rgba(255, 255, 255, 1);
+  padding-left: 4px;
 }
 
 /* Newsletter Section */
@@ -160,9 +162,9 @@
 }
 
 .newsletter-button:hover {
-  background: #A8000D;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(215, 0, 16, 0.4);
+  background: #B80010;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(215, 0, 16, 0.35);
 }
 
 /* Social Icons */
@@ -184,8 +186,9 @@
 }
 
 .social-link:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  filter: brightness(1.1);
 }
 
 .facebook-link {
@@ -201,7 +204,7 @@
 }
 
 .youtube-link:hover {
-  background: #CC0000;
+  filter: brightness(0.9);
 }
 
 .tiktok-link {
@@ -260,7 +263,8 @@
 
 .cert-badge:hover {
   background: #0052A3;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
 }
 
 .payment-logos {

@@ -29,6 +29,17 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(false);
   }, []);
 
+  // Listen for auth:logout event from API interceptor
+  useEffect(() => {
+    const handleLogout = () => {
+      setUser(null);
+      // Navigation will be handled by the component that triggers login redirect
+    };
+
+    window.addEventListener('auth:logout', handleLogout);
+    return () => window.removeEventListener('auth:logout', handleLogout);
+  }, []);
+
   // Login function
   const login = (token) => {
     localStorage.setItem(STORAGE_KEYS.TOKEN, token);

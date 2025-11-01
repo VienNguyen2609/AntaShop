@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./header.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useCart, useAuth } from "../contexts";
 import SearchBar from "./SearchBar";
 import { ROUTES, MENU_ITEMS } from "../constants";
@@ -61,13 +61,13 @@ const Header = () => {
               </span>
             </button>
 
-            <div className="brand-logo" onClick={() => navigate(ROUTES.HOME)}>
+            <Link to={ROUTES.HOME} className="brand-logo">
               <img
                 src="https://theme.hstatic.net/1000150581/1001194384/14/logo.png?v=1868"
                 alt="Anta Logo"
                 className="h-12 w-auto object-contain cursor-pointer"
               />
-            </div>
+            </Link>
           </div>
 
           <div className="header-search-container">
@@ -85,9 +85,9 @@ const Header = () => {
                   }
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div
+                  <Link
+                    to={item.link}
                     className="nav-item-link"
-                    onClick={() => handlePushRouter(item.link)}
                   >
                     <span
                       className={`nav-item-text ${
@@ -113,7 +113,7 @@ const Header = () => {
                         />
                       </svg>
                     )}
-                  </div>
+                  </Link>
 
                   {item.hasDropdown && activeDropdown === item.id && (
                     <div className="navigation-dropdown">

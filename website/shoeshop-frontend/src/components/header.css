@@ -42,6 +42,7 @@
 
 .menu-toggle:hover {
   background-color: #f7f7f7;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .toggle-bar {
@@ -83,7 +84,8 @@
 }
 
 .brand-logo:hover {
-  opacity: 0.8;
+  opacity: 0.85;
+  transform: scale(1.02);
 }
 
 .brand-logo img {
@@ -158,7 +160,7 @@
 }
 
 .nav-item-link:hover .nav-item-text {
-  color: #d70010;
+  color: var(--color-dark);
 }
 
 .nav-item-text.text-highlight {
@@ -176,7 +178,7 @@
 
 .navigation-item:hover .nav-chevron {
   transform: rotate(180deg);
-  color: #d70010;
+  color: var(--color-dark);
 }
 
 /* Navigation Dropdown */
@@ -247,7 +249,8 @@
 }
 
 .column-item span:hover {
-  color: #d70010;
+  color: var(--color-dark);
+  padding-left: 4px;
 }
 
 /* Header Right - Action Icons */
@@ -278,7 +281,8 @@
 
 .header-action:hover {
   background-color: #f7f7f7;
-  color: #d70010;
+  color: var(--color-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .header-action svg {
@@ -385,7 +389,8 @@
 
 .panel-close:hover {
   background-color: #f7f7f7;
-  color: #d70010;
+  color: var(--color-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .panel-navigation {
@@ -411,7 +416,8 @@
 
 .panel-nav-text:hover {
   background-color: #f7f7f7;
-  color: #d70010;
+  color: var(--color-dark);
+  padding-left: 28px;
 }
 
 .panel-nav-text.text-highlight {
@@ -454,8 +460,8 @@
 
 .auth-button:hover {
   background: #231f20;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(215, 0, 16, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(35, 31, 32, 0.3);
 }
 
 /* Responsive Breakpoints */

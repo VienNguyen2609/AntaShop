@@ -1,12 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../contexts';
 import { Layout } from '../components';
 import './MegaSale.css';
 
 export default function MegaSale() {
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('discount');
+  const [timeRemaining, setTimeRemaining] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  // Set countdown target date (example: 3 days from now)
+  useEffect(() => {
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 3);
+    targetDate.setHours(23, 59, 59, 999);
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = targetDate.getTime() - now;
+
+      if (distance < 0) {
+        setTimeRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+
+      setTimeRemaining({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      });
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const categories = [
     { id: 'all', name: 'Tất cả' },
@@ -155,36 +192,80 @@ export default function MegaSale() {
     }, 0);
   };
 
+  const handleAddToCart = (e, product) => {
+    e.stopPropagation();
+
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      image: product.image,
+      quantity: 1
+    };
+
+    addToCart(cartItem);
+
+    const notification = document.createElement('div');
+    notification.className = 'cart-notification';
+    notification.innerHTML = `
+      <div class="notification-icon">✓</div>
+      <div class="notification-text">Đã thêm vào giỏ hàng!</div>
+    `;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => notification.remove(), 300);
+    }, 2500);
+  };
+
+  const formatNumber = (num) => {
+    return String(num).padStart(2, '0');
+  };
+
   return (
     <Layout>
       <div className="mega-sale-page">
         <div className="sale-hero-section">
+          <div className="hero-background-decoration">
+            <div className="decoration-circle decoration-circle-1"></div>
+            <div className="decoration-circle decoration-circle-2"></div>
+            <div className="decoration-circle decoration-circle-3"></div>
+          </div>
+          
           <div className="container">
             <div className="sale-hero-content">
               <div className="hero-badge">SIÊU SALE CUỐI NĂM</div>
               <h1 className="hero-title">MEGA SALE</h1>
               <p className="hero-subtitle">GIẢM GIÁ LÊN ĐẾN 50%</p>
+              
               <div className="sale-countdown">
                 <div className="countdown-item">
-                  <span className="countdown-value">02</span>
+                  <span className="countdown-value">{formatNumber(timeRemaining.days)}</span>
                   <span className="countdown-label">Ngày</span>
                 </div>
                 <div className="countdown-separator">:</div>
                 <div className="countdown-item">
-                  <span className="countdown-value">18</span>
+                  <span className="countdown-value">{formatNumber(timeRemaining.hours)}</span>
                   <span className="countdown-label">Giờ</span>
                 </div>
                 <div className="countdown-separator">:</div>
                 <div className="countdown-item">
-                  <span className="countdown-value">45</span>
+                  <span className="countdown-value">{formatNumber(timeRemaining.minutes)}</span>
                   <span className="countdown-label">Phút</span>
                 </div>
                 <div className="countdown-separator">:</div>
                 <div className="countdown-item">
-                  <span className="countdown-value">23</span>
+                  <span className="countdown-value">{formatNumber(timeRemaining.seconds)}</span>
                   <span className="countdown-label">Giây</span>
                 </div>
               </div>
+              
               <div className="sale-stats">
                 <div className="stat-item">
                   <div className="stat-value">{saleProducts.length}+</div>
@@ -247,7 +328,9 @@ export default function MegaSale() {
                 >
                   <div className="product-image-wrapper">
                     <img src={product.image} alt={product.name} />
-                    <div className="sale-badge">{product.badge}</div>
+                    <div className={`sale-badge badge-${product.badge.toLowerCase().replace(/\s+/g, '-')}`}>
+                      {product.badge}
+                    </div>
                     <div className="discount-badge">-{product.discount}%</div>
                   </div>
                   <div className="product-info">
@@ -259,9 +342,21 @@ export default function MegaSale() {
                     <div className="savings-amount">
                       Tiết kiệm: {(product.originalPrice - product.price).toLocaleString()}₫
                     </div>
-                    <button className="add-to-cart-btn">
-                      Thêm vào giỏ
-                    </button>
+                    <div className="product-actions">
+                      <button
+                        className="add-to-cart-btn"
+                        onClick={(e) => handleAddToCart(e, product)}
+                      >
+                        <span className="btn-icon">🛒</span>
+                        <span className="btn-text">Thêm giỏ hàng</span>
+                      </button>
+                      <button
+                        className="buy-now-btn"
+                        onClick={(e) => handleAddToCart(e, product)}
+                      >
+                        Mua ngay
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -286,7 +381,7 @@ export default function MegaSale() {
               <div className="benefit-card">
                 <div className="benefit-icon">💳</div>
                 <h3>Thanh Toán Linh Hoạt</h3>
-                <p>Nhiều hình thức thanh toán</p>
+                <p>Nhiều h��nh thức thanh toán</p>
               </div>
               <div className="benefit-card">
                 <div className="benefit-icon">🔄</div>

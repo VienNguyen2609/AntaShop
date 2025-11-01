@@ -68,7 +68,7 @@
 }
 
 .clear-filters-btn:hover {
-  color: #c9302c;
+  color: var(--color-dark);
   text-decoration: underline;
 }
 
@@ -110,6 +110,7 @@
 .filter-checkbox:hover,
 .filter-radio:hover {
   color: #000;
+  padding-left: 4px;
 }
 
 .filter-checkbox input[type="checkbox"],
@@ -139,6 +140,8 @@
 
 .size-btn:hover {
   border-color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
 }
 
 .size-btn.active {
@@ -166,6 +169,8 @@
 
 .color-btn:hover {
   border-color: #000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
 }
 
 .color-btn.active {
@@ -241,6 +246,7 @@
 
 .view-btn:hover {
   border-color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .view-btn.active {
@@ -281,8 +287,9 @@
 }
 
 .product-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  border-color: var(--color-muted);
 }
 
 .product-image-wrapper {
@@ -348,8 +355,9 @@
 
 .wishlist-btn:hover {
   background: #fff;
-  color: #d9534f;
-  transform: scale(1.1);
+  color: var(--color-dark);
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .product-details {
@@ -447,6 +455,8 @@
 .page-btn:hover:not(:disabled) {
   border-color: #000;
   color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
 }
 
 .page-btn.active {

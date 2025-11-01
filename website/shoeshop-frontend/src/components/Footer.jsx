@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
@@ -24,7 +25,7 @@ const Footer = () => {
               </p>
             </div>
             <div className="copyright-text">
-              © Bản quyền thuộc về <a href="/" className="footer-link">Anta Việt Nam</a> | Cung cấp bởi <a href="#" className="footer-link">Haravan</a>
+              © Bản quyền thuộc về <Link to="/" className="footer-link">Anta Việt Nam</Link> | Cung cấp bởi <span className="footer-link">Haravan</span>
             </div>
           </div>
 
@@ -32,11 +33,11 @@ const Footer = () => {
           <div className="footer-section">
             <h3 className="section-heading">CHÍNH SÁCH</h3>
             <ul className="section-links">
-              <li className="link-item"><a href="#" className="link-text">Chính sách vận chuyển</a></li>
-              <li className="link-item"><a href="#" className="link-text">Chính sách đổi trả hàng</a></li>
-              <li className="link-item"><a href="#" className="link-text">Chính sách bảo mật thông tin</a></li>
-              <li className="link-item"><a href="#" className="link-text">Chính sách kiểm hàng</a></li>
-              <li className="link-item"><a href="#" className="link-text">Nghĩa vụ của người bán và nghĩa vụ của khách hàng trong mỗi giao dịch</a></li>
+              <li className="link-item"><Link to="/policies/shipping" className="link-text">Chính sách vận chuyển</Link></li>
+              <li className="link-item"><Link to="/policies/returns" className="link-text">Chính sách đổi trả hàng</Link></li>
+              <li className="link-item"><Link to="/policies/privacy" className="link-text">Chính sách bảo mật thông tin</Link></li>
+              <li className="link-item"><Link to="/policies/inspection" className="link-text">Chính sách kiểm hàng</Link></li>
+              <li className="link-item"><Link to="/policies/obligations" className="link-text">Nghĩa vụ của người bán và nghĩa vụ của khách hàng trong mỗi giao dịch</Link></li>
             </ul>
           </div>
 
@@ -44,11 +45,11 @@ const Footer = () => {
           <div className="footer-section">
             <h3 className="section-heading">HỖ TRỢ KHÁCH HÀNG</h3>
             <ul className="section-links">
-              <li className="link-item"><a href="#" className="link-text">Giới thiệu</a></li>
-              <li className="link-item"><a href="#" className="link-text">Quy định chung</a></li>
-              <li className="link-item"><a href="#" className="link-text">Hệ thống cửa hàng</a></li>
-              <li className="link-item"><a href="#" className="link-text">Kiểm Tra Đơn Hàng</a></li>
-              <li className="link-item"><a href="#" className="link-text">ANTA Kids</a></li>
+              <li className="link-item"><Link to="/about" className="link-text">Giới thiệu</Link></li>
+              <li className="link-item"><Link to="/terms" className="link-text">Quy định chung</Link></li>
+              <li className="link-item"><Link to="/stores" className="link-text">Hệ thống cửa hàng</Link></li>
+              <li className="link-item"><Link to="/order-tracking" className="link-text">Kiểm Tra Đơn Hàng</Link></li>
+              <li className="link-item"><Link to="/kids" className="link-text">ANTA Kids</Link></li>
             </ul>
           </div>
 
@@ -93,9 +94,9 @@ const Footer = () => {
         <div className="footer-divider">
           <div className="certification-bar">
             <div className="cert-item">
-              <a href="#" className="cert-badge" target="_blank" rel="noopener noreferrer">
+              <span className="cert-badge">
                 ĐÃ THÔNG BÁO BỘ CÔNG THƯƠNG
-              </a>
+              </span>
             </div>
             <div className="payment-logos">
               <span className="payment-item">💳 VISA</span>

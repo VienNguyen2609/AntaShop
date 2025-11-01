@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../contexts';
 import { Layout } from '../components';
 import './CartPage.css';
@@ -181,7 +181,7 @@ export default function CartPage() {
       
       <div className="breadcrumbs">
         <div className="container">
-          <span onClick={() => navigate('/home')} className="breadcrumb-link">Trang chủ</span>
+          <Link to="/home" className="breadcrumb-link">Trang chủ</Link>
           <span className="breadcrumb-separator">/</span>
           <span className="breadcrumb-current">Giỏ hàng</span>
         </div>
