@@ -76,7 +76,7 @@ export default function HomePage() {
     },
     {
       id: 8,
-      name: "��o Khoác Thể Thao ANTA Windbreaker",
+      name: "Áo Khoác Thể Thao ANTA Windbreaker",
       price: "1.359.000₫",
       originalPrice: "1.699.000₫",
       discount: "20%",
@@ -191,7 +191,7 @@ export default function HomePage() {
                 <span className="promo-banner-badge">🔥 MEGA SALE</span>
                 <h2 className="promo-banner-title">GIẢM GIÁ LÊN ĐẾN 50%</h2>
                 <p className="promo-banner-description">
-                  Cơ hội vàng sở hữu giày th��� thao chính hãng với giá tốt nhất. 
+                  Cơ hội vàng sở hữu giày thể thao chính hãng với giá tốt nhất. 
                   Khuyến mãi có giới hạn, nhanh tay đặt hàng ngay!
                 </p>
                 <button className="promo-banner-button" onClick={() => navigate('/collections/san-pham-mega-sale')}>
